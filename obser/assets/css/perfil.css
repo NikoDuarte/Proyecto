@@ -1,0 +1,106 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+}
+
+.header{
+    padding: 65px;
+    text-align: center;
+    background: -webkit-linear-gradient(to right, rgb(0, 174, 255), rgb(159, 108, 255));
+    background: linear-gradient(to right, rgb(159, 108, 255), rgb(0, 174, 255));
+    
+    color: white;
+}
+
+.header h1{
+    font-size: 40px;
+}
+
+.navbar{
+    overflow: hidden;
+    background-color: #333;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+}
+
+.navbar a{
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.navbar a.right{
+    float: right;
+}
+
+.navbar a:hover{
+    background-color: #ddd;
+    color: black;
+}
+
+.row{
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form{
+    -ms-flex: 30%;
+    flex: 30%;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}
+
+.form input[type="text"]{
+	outline: none;
+	padding: 20px;
+	display: block;
+	width: 300px;
+	border-radius: 3px;
+	border: 1px solid rgb(88, 88, 88);
+	margin: 20px auto;
+}
+
+
+.form input[class="modificar"] {
+	padding: 20px;
+	color: black;
+	background: rgb(153, 255, 0);
+	width: 320px;
+	margin: 20px auto;
+	margin-top: 0;
+	border: 0;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.form input[class="modificar"]:hover {
+    background-color: rgb(68, 68, 68);
+    color: white;
+}
+
+.form input[class="consultar"] {
+	padding: 20px;
+	color: black;
+	background: rgb(0, 119, 255);
+	width: 320px;
+	margin: 20px auto;
+	margin-top: 0;
+	border: 0;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.form input[class="consultar"]:hover {
+    background-color: rgb(68, 68, 68);
+    color: white;
+}

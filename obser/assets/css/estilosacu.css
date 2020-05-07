@@ -1,0 +1,131 @@
+*{
+	box-sizing: border-box;
+}
+
+body{
+	margin: 0;
+	font-family: 'Prompt', sans-serif;
+	background-color: #eeeeee;
+}
+
+.header{
+	padding: 40px;
+	text-align: center;
+    background: #ffd000ee;
+	color: white;
+}
+
+.header h1{
+	font-size: 40px;
+}
+
+.navbar{
+	overflow: hidden;
+	background-color: #333;
+	position: sticky;
+	position: -webkit-sticky;
+	top: 0;
+}
+
+.navbar a{
+	float: left;
+	display: block;
+	color: #ffffff;
+	text-align: center;
+	padding: 14px 20px;
+	text-decoration: none;
+}
+
+.navbar a:hover{
+	background-color: #dddddd;
+	color: black;
+}
+
+.navbar a.active{
+	background-color: #666666;
+	color: #fff;
+}
+
+.navbar a.right{
+	float: right;
+}
+
+.row{
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+
+.side{
+	-ms-flex: 30%;
+	flex: 30%;
+	background-color: white;
+	padding: 15px;
+}
+
+.side a.boton {
+	border: 5px solid #808080; /*anchura, estilo y color borde*/
+	padding: 20spx; /*espacio alrededor texto*/
+	background-color: #808080; /*color botón*/
+	color: #ffffff; /*color texto*/
+	text-decoration: none; /*decoración texto*/
+	text-transform: uppercase; /*capitalización texto*/
+	font-family: 'Prompt', sans-serif; /*tipografía texto*/
+	border-radius: 50px; /*bordes redondos*/
+	}
+
+
+.side2{
+	-ms-flex: 35%;
+	flex: 35%;
+	background-color: #ffd000ee;
+	padding: 50px;
+}
+.side2 a.boton {
+	border: 1px solid #808080; /*anchura, estilo y color borde*/
+	padding: 10px; /*espacio alrededor texto*/
+	background-color: #808080; /*color botón*/
+	color: #ffffff; /*color texto*/
+	text-decoration: none; /*decoración texto*/
+	text-transform: uppercase; /*capitalización texto*/
+	font-family: 'Prompt', sans-serif; /*tipografía texto*/
+	border-radius: 50px; /*bordes redondos*/
+	}
+
+
+
+.fakeobser [type="text"]{
+		width: 20%;
+		height: 40px;
+		border: 1px solid gray;
+		margin-bottom: 3px;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-o-border-radius: 5px;
+		-webkit-border-radius: 5px;
+}
+.fakeobser textarea{
+		width: 80%;
+		height: 215px;
+		border: 1px solid gray;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-o-border-radius: 5px;
+		-webkit-border-radius: 5px;
+}
+.fakeobser input[type="submit"] {
+		padding: 20px;
+		color: black;
+		background: white;
+		width: 320px;
+		margin: 20px auto;
+		margin-top: 0;
+		border: 0;
+		border-radius: 10px;
+		cursor: pointer;
+}
+.fakeobser input[type="submit"]:hover {
+		background-color: rgb(68, 68, 68);
+		color: white;
+}
