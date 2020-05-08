@@ -29,7 +29,7 @@ if (!isset($_SESSION['username'])) {
 
     <div class="navbar">
         <a href="#" class="active">Inicio</a>
-        <a href="#">Reporte De Observaciones</a>
+        <a href="php/reportes/reporteest.php">Reporte De Observaciones</a>
         <a href="../obser/perfiles/mi_perfil_est.php?correo=<?php echo $_SESSION['username'];?>">Mi Perfil</a>
         <a href="../php-login/logout.php" class="right">Cerrar Sesion</a>
     </div>
@@ -42,22 +42,22 @@ if (!isset($_SESSION['username'])) {
              <br>
              <br>        
             <div class="side2">
-             <input type="text" placeholder="Nombre del Docente">
-             <input type="text" placeholder="Tipo de Anotacion"> 
+            <form action="php/mensajeest.php" method="post">
+             <input type="text" placeholder="Nombre del Docente" name="docente">
 
                  <h2>Tú version</h2>
                  <br>
-                 <textarea class="form-control" type="textarea" name="form" id="form" maxlength="650" rows="10">
+                 <textarea class="form-control" type="textarea" name="version" id="form" maxlength="650" rows="10">
                  </textarea>
                  <br>        
                  <h2>Compromiso</h2>
                  <br>
-                 <textarea class="form-control" type="textarea" name="form" id="form" maxlength="650" rows="10">
+                 <textarea class="form-control" type="textarea" name="compromiso" id="form" maxlength="650" rows="10">
                  </textarea>
                  <br>
-                 <input type="submit" value="Envia">
+                 <input type="submit" value="Envia" name="respuesta">
                  <br>
-
+             </form>
              </div>
             </div>
         </div>

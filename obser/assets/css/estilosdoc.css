@@ -308,6 +308,7 @@ body{
 
 
 .side a.boton {
+	align-items: right;
 	border: 10px solid #494949; /*anchura, estilo y color borde*/
 	padding: 20spx; /*espacio alrededor texto*/
 	background-color: #494949; /*color botón*/
@@ -338,6 +339,24 @@ body{
 	-o-border-radius: 5px;
 	-webkit-border-radius: 5px;
 }
+
+.fakeobser select{
+	width: 20%;
+	height: 40px;
+	border: 1px solid gray;
+	margin-bottom: 3px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	-webkit-border-radius: 5px;
+
+}
+
+.fakeobser select:hover{
+	background-color: #adadad;
+    color: black;
+}
+
 
 .fakeobser textarea{
 	width: 80%;

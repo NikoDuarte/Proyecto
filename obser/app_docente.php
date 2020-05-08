@@ -19,6 +19,7 @@ if (!isset($_SESSION['username'])) {
 </head>
 <body>
 
+
     <!--POPUPS_GRADO-->
     <div class="ventana_grado" id="grado">
         <div id="cerrar"> 
@@ -36,7 +37,7 @@ if (!isset($_SESSION['username'])) {
 						$con = New Conexion();
 						
 						$sede = $_GET["sede"];
-						$resultados = $con->query("SELECT grado FROM usuarios WHERE sede = '$sede'");
+						$resultados = $con->query("SELECT DISTINCT grado FROM usuarios WHERE sede = '$sede'");
 						while ($consulta = mysqli_fetch_array($resultados)) {
 							echo "<option value=".$consulta ['grado'].">".$consulta ['grado']."</option>";
 							
@@ -74,7 +75,7 @@ if (!isset($_SESSION['username'])) {
 						
 						$sede = $_GET["sede"];
 						$grado = $_GET["grado"];
-						$resultados = $con->query("SELECT curso FROM usuarios WHERE grado = '$grado'");
+						$resultados = $con->query("SELECT DISTINCT curso FROM usuarios WHERE grado = '$grado'");
 						while ($consulta = mysqli_fetch_array($resultados)) {
 							echo "<option value=".$consulta ['curso'].">".$consulta ['curso']."</option>";
 							
@@ -112,8 +113,9 @@ if (!isset($_SESSION['username'])) {
 						$con = New Conexion();
 						
 						$sede = $_GET["sede"];
-						$curso = $_GET["curso"];
-						$resultados = $con->query("SELECT  CONCAT(nombre,'_',apellido) AS nombre FROM usuarios WHERE curso = '$curso'");
+                        $curso = $_GET["curso"];
+                        $resultados = $con->query("SELECT  correo AS nombre FROM usuarios WHERE curso = '$curso'");
+						/*$resultados = $con->query("SELECT  CONCAT(nombre,'_',apellido) AS nombre FROM usuarios WHERE curso = '$curso'");*/
 						while ($consulta = mysqli_fetch_array($resultados)) {
 							echo "<option value=".$consulta ['nombre'].">".$consulta ['nombre']."</option>";
 							
@@ -143,6 +145,8 @@ if (!isset($_SESSION['username'])) {
     </div>
     <div class="navbar">
         <a href="#" class="active">Inicio</a>
+        <a href="php/reportes/reportedoc.php">Tus Observaciones</a>
+        <a href="php/reportes/respuestadoc.php">Respuesta Observaciones</a>
         <a href="../obser/perfiles/mi_perfil_doc.php?correo=<?php echo $_SESSION['username'];?>">Mi Perfil</a>
         <a href="../php-login/logout.php" class="right">Cerrar Sesion</a>
     </div>
@@ -252,6 +256,11 @@ function continuar3() {
                   <input type="text" placeholder="Nombre del Estudiante..." name="estudiante" value="<?php echo $_GET["alumno"]; ?>">
                   <input type="text" placeholder="Grado..." name="grado" value="<?php echo $_GET["grado"]; ?>"> 
                   <input type="text" placeholder="Curso...." name="curso" value="<?php echo $_GET["curso"]; ?>">
+                  <select name="tipo" class="tipoobser">
+                       <option>SELECCIONA UN TIPO</option>
+                       <option value="disciplina">Disciplinaria</option>
+                       <option value="academica">Academica</option>
+                  </select>
                   <br>
                   <br>
                   <br>
@@ -259,7 +268,7 @@ function continuar3() {
                   </textarea>
                   <br>
                   <br>
-                  <input type="submit" value="Enviar Observacion">
+                  <input type="submit" value="Enviar Observacion" name="observacion">
               </form>
 			  
               </div>

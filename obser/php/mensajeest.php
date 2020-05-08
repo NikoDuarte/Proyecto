@@ -12,10 +12,10 @@ if (!isset($_SESSION['username'])) {
 include("conexion.php");
 $con = New Conexion();
 
-if (isset($_POST['observacion'])) {
-    $para = $_POST['estudiante'];
-    $tipo = $_POST['tipo'];
-    $observacion = $_POST['obser'];
+if (isset($_POST['respuesta'])) {
+    $para = $_POST['docente'];
+    $version = $_POST['version'];
+    $compromiso = $_POST['compromiso'];
 
     $consulta = $con->query("SELECT * FROM usuarios WHERE correo = '$para'");
     $row =mysqli_fetch_array($consulta);
@@ -23,11 +23,11 @@ if (isset($_POST['observacion'])) {
 
     if ($contar != 0) {
 
-        $sentencia="INSERT INTO observaciones (de,para,tipo,fecha,observacion) values('".$_SESSION['username']."','".$row['correo']."','$tipo',now(),'$observacion')"; 
+        $sentencia="INSERT INTO respuesta (de,para,fecha,version,compromiso) values('".$_SESSION['username']."','".$row['correo']."',now(),'$version','$compromiso')"; 
          $insertar=$con->query($sentencia) or die("Error de datos".mysqli_error($con));
 
         if ($insertar) {
-            header("location:../app_docente.php");
+            header("location:../app_estudiante.php");
             echo "<script>alert('La observacion se ha enviada')</script>";
         }else{
             echo "<script>alert('La observacion no se ha enviado')</script>";

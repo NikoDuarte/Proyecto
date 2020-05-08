@@ -14,7 +14,6 @@ $con = New Conexion();
 
 if (isset($_POST['observacion'])) {
     $para = $_POST['estudiante'];
-    $tipo = $_POST['tipo'];
     $observacion = $_POST['obser'];
 
     $consulta = $con->query("SELECT * FROM usuarios WHERE correo = '$para'");
@@ -23,7 +22,7 @@ if (isset($_POST['observacion'])) {
 
     if ($contar != 0) {
 
-        $sentencia="INSERT INTO observaciones (de,para,tipo,fecha,observacion) values('".$_SESSION['username']."','".$row['correo']."','$tipo',now(),'$observacion')"; 
+        $sentencia="INSERT INTO observaciones (de,para,fecha,observacion) values('".$_SESSION['username']."','".$row['id']."',now(),'$observacion')"; 
          $insertar=$con->query($sentencia) or die("Error de datos".mysqli_error($con));
 
         if ($insertar) {
