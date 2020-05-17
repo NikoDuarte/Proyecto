@@ -34,8 +34,8 @@ if (isset($_POST['observacion'])) {
         }
     }else{
         echo "<script>alert('El Usuario al que intenta enviar la observacion no existe')</script>";
+        header("location:../app_docente.php");
     }
-
 }
 
 

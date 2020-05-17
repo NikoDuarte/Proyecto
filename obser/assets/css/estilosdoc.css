@@ -1,27 +1,14 @@
 *{
-    box-sizing: border-box;
-}
-
-body{
-    font-family: 'Prompt', sans-serif;
     margin: 0;
+    padding: 0;
+	box-sizing: border-box;
+	font-family: 'Raleway', sans-serif;
 }
 
-.header{
-    padding: 80px;
-    text-align: center;
-    background: #005b8b;
-    color: white;
-}
 
-.header h1{
-    font-size: 40px;
-}
-
-/*popups*/
-
+/*Ventana emergente*/
 .ventana_grado{
-	background: #333;
+	background: rgba(51, 51, 51, 0.596);
 	width: 30%;
 	color: white;
 	font-size: 20px;
@@ -29,10 +16,10 @@ body{
 	padding: 15px;
 	min-height: 70px;
 	position: absolute;
-	left: 45%;
-	top: 45%;
+	left: 65%;
+	top: 15%;
 	display: none;
-	border-radius: 27px;
+	border-radius: 15px;
 }
 
 #cerrar {
@@ -43,13 +30,13 @@ body{
 
 .ventana_grado input.boton {
 	border: 18px solid white; /*anchura, estilo y color borde*/
-	padding: 35spx; /*espacio alrededor texto*/
+	padding: 20spx; /*espacio alrededor texto*/
 	background-color: white; /*color botón*/
 	color: black; /*color texto*/
 	text-decoration: none; /*decoración texto*/
 	text-transform: uppercase; /*capitalización texto*/
 	font-family: 'Prompt', sans-serif; /*tipografía texto*/
-    border-radius: 50px; /*bordes redondos*/
+    border-radius: 15px; /*bordes redondos*/
     cursor: pointer;
 }
 
@@ -69,7 +56,7 @@ body{
 
 /*POPUP_CURSO*/
 .ventana_curso{
-	background: #333;
+	background: rgba(51, 51, 51, 0.596);
 	width: 30%;
 	color: white;
 	font-size: 20px;
@@ -77,8 +64,8 @@ body{
 	padding: 15px;
 	min-height: 70px;
 	position: absolute;
-	left: 45%;
-	top: 45%;
+	left: 65%;
+	top: 15%;
 	display: none;
 	border-radius: 27px;
 }
@@ -97,7 +84,7 @@ body{
 	text-decoration: none; /*decoración texto*/
 	text-transform: uppercase; /*capitalización texto*/
 	font-family: 'Prompt', sans-serif; /*tipografía texto*/
-    border-radius: 50px; /*bordes redondos*/
+    border-radius: 15px; /*bordes redondos*/
     cursor: pointer;
 }
 
@@ -117,7 +104,7 @@ body{
 
 /*POPUP_ALUMNO*/
 .ventana_alumno{
-	background: #333;
+	background: rgba(51, 51, 51, 0.596);
 	width: 30%;
 	color: white;
 	font-size: 20px;
@@ -125,8 +112,8 @@ body{
 	padding: 15px;
 	min-height: 70px;
 	position: absolute;
-	left: 45%;
-	top: 45%;
+	left: 65%;
+	top: 15%;
 	display: none;
 	border-radius: 27px;
 }
@@ -145,7 +132,7 @@ body{
 	text-decoration: none; /*decoración texto*/
 	text-transform: uppercase; /*capitalización texto*/
 	font-family: 'Prompt', sans-serif; /*tipografía texto*/
-    border-radius: 50px; /*bordes redondos*/
+    border-radius: 15px; /*bordes redondos*/
     cursor: pointer;
 }
 
@@ -163,45 +150,87 @@ body{
 }
 
 
-/*menu*/
+.content-all{
+    width: 100%;
+    background-color: rgba(0, 140, 255, 0.493);
+    margin: auto;
+    margin-top: 80px;
+}
 
-.navbar{
-    overflow: hidden;
-    background-color: #333;
-    position: sticky;
-    position: -webkit-sticky;
+header{
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    left: 0;
     top: 0;
+    background-color: rgba(0, 140, 255, 0.493);
 }
 
-.navbar a{
-    float: left;
+#check{
+    display: none;
+}
+
+#check:checked ~ .menu{
+    width: 250px;
+}
+
+.menu{
+    position: fixed;
+    top: 60px;
+    width: 0px;
+    height: 100vh;
+    background: rgba(51, 51, 51, 0.616);
+    transition: all 0.25s;
+    overflow: hidden;
+}
+.menu li a{
+    list-style: none;
+    padding: 16px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.25s;
     display: block;
+	width: 250px;
+	text-decoration: none;
+	font-size: 20px;
+}
+
+.menu li:hover{
+    background: rgba(0, 166, 255, 0.651);
+}
+
+
+.content-all label{
+    position: fixed;
+    width: 100%;
+    max-width: 350px;
+    top: 14px;
+    font-size: 26px;
     color: white;
-    text-align: center;
-    padding: 14px 20px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.content-all h2 a{
+    position: fixed;
+    width: 100%;
+    max-width: 1275px;
+    top: 14px;
+    font-size: 26px;
+    text-align: right;
     text-decoration: none;
+    color: #ffffff;
 }
 
-.navbar a.right{
-    float: right;
-}
+/*imagen background*/
 
-.navbar a:hover{
-    background-color: #ddd;
-    color: black;
-}
-
-.navbar a.active{
-    background-color: #666;
-    color: white;
-}
 
 /*submenu*/
 
 .btn-menu {
 	display: none;
-	padding: 20px;
-	background: #0d2c44;
+	padding: 10px;
+	background: #00a6ff;
 	color:#fff;
 }
 
@@ -218,7 +247,7 @@ body{
 	line-height: 18px;
 }
 
-.contenedor-menu .menu {
+.contenedor-menu .submenu {
 	width: 100%;
 }
 
@@ -226,52 +255,38 @@ body{
 	list-style: none;
 }
 
-.contenedor-menu .menu li a {
+.contenedor-menu .submenu li a {
 	color:#494949;
 	display: block;
 	padding: 15px 20px;
 	background: #e9e9e9;
 }
 
-.contenedor-menu .menu li a:hover {
-	background: #005b8b;
+.contenedor-menu .submenu li a:hover {
+	background: #00a6ff;
 	color:#fff;
 }
 
-.contenedor-menu .menu .icono {
-	font-size: 12px;
-	line-height: 18px;
-}
 
-.contenedor-menu .menu .icono.izquierda {
-	float: left;
-	margin-right: 10px; 
-}
-
-.contenedor-menu .menu .icono.derecha {
-	float: right;
-	margin-left: 10px; 
-}
-
-.contenedor-menu .menu ul {
+.contenedor-menu .submenu ul {
 	display: none;
 }
 
-.contenedor-menu .menu ul li a {
+.contenedor-menu .submenu ul li a {
 	background: #424242;
 	color:#e9e9e9;
 }
 
-.contenedor-menu .menu .activado > a {
-	background: #005b8b;
+.contenedor-menu .submenu .activado > a {
+	background: #00a6ff;
 	color:#fff;
 }
 
 @media screen and (max-width: 450px) {
-	body {
+	/*body {
 		padding-top: 80px;
 	}
-
+*/
 	.contenedor-menu {
 		margin: 0;
 		width: 100%;
@@ -284,30 +299,14 @@ body{
 		display: block;
 	}
 
-	.contenedor-menu .menu {
+	.contenedor-menu .submenu {
 		display: none;
 	}
 }
 
-/*SIDE*/
-
-.row{
-    display: -ms-flexbox;
-    display: flex;
-	flex-wrap: wrap;
-	color: white;
-}
-
-.side{
-    -ms-flex: 30%;
-    flex: 30%;
-    background-color: #747474;
-    padding: 15px;
-}
 
 
-
-.side a.boton {
+a.boton {
 	align-items: right;
 	border: 10px solid #494949; /*anchura, estilo y color borde*/
 	padding: 20spx; /*espacio alrededor texto*/
@@ -320,12 +319,27 @@ body{
 
 }
 
+.row{
+    display: -ms-flexbox;
+    display: flex;
+	flex-wrap: wrap;
+	color: white;
+}
+
+.side{
+    -ms-flex: 30%;
+    flex: 30%;
+    /*background-color: #747474;*/
+    padding: 15px;
+}
+
+
 /*SIDE2*/
 
 .side2{
     -ms-flex: 15%;
     flex: 15%;
-    background-color: #01498b;
+    background-color: rgba(0, 140, 255, 0.493);
     padding: 120px;
 }
 
@@ -381,6 +395,9 @@ body{
 }
 
 .fakeobser input[type="submit"]:hover {
-    background-color: rgb(68, 68, 68);
+    background-color: rgba(32, 32, 32, 0.534);
     color: white;
 }
+
+
+

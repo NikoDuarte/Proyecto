@@ -6,12 +6,11 @@ $correo = $_SESSION['username'];
 
 
 if (!isset($_SESSION['username'])) {
-    header("location:../php-login/login.php");
+    header("location:../../php-login/login.php");
 }
 
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,11 +18,11 @@ if (!isset($_SESSION['username'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tus Observaciones</title>
-    <link rel="stylesheet" href="assets/css/estilosest.css">
+    <link rel="stylesheet" href="assets/css/estilosacu.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
     <style>
         body{
-            background-image: url("img/imagenest.jpg");
+            background-image: url("img/imagenacu.jpg");
         }
     </style>
 </head>
@@ -32,15 +31,15 @@ if (!isset($_SESSION['username'])) {
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check-menu">
-        <h2><a href="../../perfiles/mi_perfil_est.php?correo=<?php echo $_SESSION['username'];?>">BIENVENIDO <?php echo $correo?></a></h2>
+        <h2><a href="../../perfiles/mi_perfil_acu.php?correo=<?php echo $_SESSION['username'];?>">BIENVENIDO <?php echo $correo?></a></h2>
         <label for="check-menu" class="icon-menu">
             <img src="img/menu.svg" width="25" height="25">
         </label>
         <nav class="menu">
             <ul>
-                <li><a href="../../app_estudiante.php"> Inicio</a></li>
-                <li><a href="../../perfiles/mi_perfil_est.php?correo=<?php echo $_SESSION['username'];?>"> Mi perfil</a></li>
-                <li><a href="../php-login/logout.php"> Cerrar Sesion</a></li>
+                <li><a href="../../app_acudiente.php"> Inicio</a></li>
+                <li><a href="../..//perfiles/mi_perfil_acu.php?correo=<?php echo $_SESSION['username'];?>"> Mi perfil</a></li>
+                <li><a href="../../php-login/logout.php"> Cerrar Sesion</a></li>
             </ul>
         </nav>
     </div>
@@ -71,14 +70,12 @@ while($row = mysqli_fetch_array($consulta)){
     </tbody>
 <?php }?>
 </table>
-
 <br><br><br><br>
 <h2 align="center" class="respuesta">Respuesta</h2>
 <div id="main-container">
     <table>
         <thead>
             <th>Respondio la observacion</th>
-            <th>version</th>
             <th>Compromiso</th>
             <th>Fecha</th>
         </thead>
@@ -94,7 +91,6 @@ while($row = mysqli_fetch_array($consulta)){
     <tbody>
         <tr>
             <td><?php echo $row['de']?></td>
-            <td><?php echo $row['version']?></td>
             <td><?php echo $row['compromiso']?></td>
             <td><?php echo $row['fecha']?></td>
         </tr>

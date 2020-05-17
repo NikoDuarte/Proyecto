@@ -1,0 +1,120 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+img{
+    height: auto;
+    max-width: 100%;
+}
+
+.content-all{
+    width: 100%;
+    background-color: rgba(255, 238, 0, 0.603);
+    margin: auto;
+    margin-top: 80px;
+}
+
+header{
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(255, 238, 0, 0.603);
+}
+
+#check-menu{
+    display: none;
+}
+
+#check-menu:checked ~ .menu{
+    width: 250px;
+}
+
+.menu{
+    position: fixed;
+    top: 60px;
+    width: 0px;
+    height: 100vh;
+    background: rgba(51, 51, 51, 0.521);
+    transition: all 0.25s;
+    overflow: hidden;
+}
+.menu li a{
+    list-style: none;
+    padding: 16px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.25s;
+    display: block;
+    width: 250px;
+    text-decoration: none;
+}
+
+.menu li:hover{
+    background: rgba(255, 238, 0, 0.603);
+}
+
+
+.content-all label{
+    position: fixed;
+    width: 100%;
+    max-width: 350px;
+    top: 14px;
+    font-size: 26px;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.content-all h2 a{
+    position: fixed;
+    width: 100%;
+    max-width: 1275px;
+    top: 14px;
+    font-size: 26px;
+    text-align: right;
+    text-decoration: none;
+    color: #000;
+}
+
+.respuesta{
+    color: white;
+    background-color: rgba(77, 77, 77, 0.781);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#main-container{
+	margin: 150px auto;
+	width: 80%;
+}
+
+table{
+	background-color: rgba(255, 255, 255, 0.329);
+	text-align: left;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td{
+	padding: 20px;
+}
+
+thead{
+	background-color: rgba(255, 238, 0, 0.603);
+	border-bottom: solid 5px rgba(112, 104, 0, 0.671);
+	color: #000;
+}
+
+tr:nth-child(even){
+	background-color: #ddd;
+}
+
+tr:hover td{
+	background-color: rgba(43, 43, 43, 0.493);
+	color: white;
+}

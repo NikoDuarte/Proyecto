@@ -1,0 +1,167 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+
+.content-all{
+    width: 100%;
+    background-color: rgba(255, 0, 0, 0.637);
+    margin: auto;
+    margin-top: 80px;
+}
+
+header{
+    width: 100%;
+    height: 65px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(255, 0, 0, 0.637);
+}
+
+#check{
+    display: none;
+}
+
+#check:checked ~ .menu{
+    width: 300px;
+}
+
+.menu{
+    position: fixed;
+    top: 65px;
+    width: 300px;
+    height: 100vh;
+    background: rgba(51, 51, 51, 0.712);
+    transition: all 0.25s;
+    overflow: hidden;
+}
+.menu li a{
+    list-style: none;
+    padding: 16px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-size: 18px;
+    display: block;
+    width: 300px;
+    text-decoration: none;
+}
+
+.menu li:hover{
+    background: rgba(255, 0, 0, 0.479);
+}
+
+
+.content-all label{
+    position: fixed;
+    width: 100%;
+    max-width: 350px;
+    top: 14px;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.content-all h2 a{
+    position: fixed;
+    width: 100%;
+    max-width: 1275px;
+    top: 14px;
+    font-size: 26px;
+    text-align: right;
+    text-decoration: none;
+    color: #fff;
+}
+
+.content-all p{
+    position: fixed;
+    width: 100%;
+    max-width: 1100px;
+    top: 45px;
+    font-size: 26px;
+    text-align: right;
+    text-decoration: none;
+    color: #000;
+
+}
+
+.row{
+    display: inline-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form{
+    -ms-flex: 30%;
+    flex: 30%;
+    padding: 0;
+    text-align: center;
+}
+
+.form h1{
+    color: white;
+}
+
+.form h2{
+    color: #fff;
+}
+
+.form input[type="text"]{
+    text-align: center;
+    color: #000;
+    font-size: 1.1rem;
+	outline: none;
+	padding: 20px;
+	display: block;
+	width: 300px;
+	border-radius: 7px;
+	border: 1px solid rgb(88, 88, 88);
+	margin: 20px auto;
+}
+
+.form input[type="text"]:hover{
+    background-color: rgba(75, 75, 75, 0.452);
+    color: #fff;
+}
+
+.form input[class="modificar"] {
+	padding: 20px;
+	color: #000000;
+	background: rgba(153, 255, 0, 0.548);
+	width: 320px;
+	margin: 20px auto;
+	margin-top: 0;
+	border: 0;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.form input[class="modificar"]:hover {
+    background-color: rgba(153, 255, 0, 0.815);
+    color: #000;
+}
+
+.form input[class="consultar"] {
+	padding: 20px;
+	color: white;
+	background: rgba(0, 119, 255, 0.575);
+	width: 320px;
+	margin: 20px auto;
+	margin-top: 0;
+	border: 0;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.form input[class="consultar"]:hover {
+    background-color: rgba(0, 119, 255, 0.856);
+    color: white;
+}
+
+
+
+
