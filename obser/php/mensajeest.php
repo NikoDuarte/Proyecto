@@ -1,11 +1,15 @@
 <?php
 
 session_start();
-$correo = $_SESSION['username'];
+ob_start();
 
-if (!isset($_SESSION['username'])) {
-    header("location:../php-login/login.php");
+$doc = $_SESSION['documento'];
+$nom = $_SESSION['username'];
+if (!isset($_SESSION['username'],$_SESSION['documento'])) {
+    header("location:../php-login/login.html");
 }
+
+
 
 
 
@@ -17,23 +21,31 @@ if (isset($_POST['respuesta'])) {
     $version = $_POST['version'];
     $compromiso = $_POST['compromiso'];
 
-    $consulta = $con->query("SELECT * FROM usuarios WHERE correo = '$para'");
+    $consulta = $con->query("SELECT * FROM usuarios WHERE documento = substr('$para',1,instr('$para','_')-1)");
     $row =mysqli_fetch_array($consulta);
     $contar =mysqli_num_rows($consulta);
 
     if ($contar != 0) {
 
-        $sentencia="INSERT INTO respuesta (de,para,fecha,version,compromiso) values('".$_SESSION['username']."','".$row['correo']."',now(),'$version','$compromiso')"; 
+        $sentencia="INSERT INTO respuesta (de,para,fecha,version,compromiso) values('".$_SESSION['username']."','".$row['documento']."',now(),'$version','$compromiso')"; 
          $insertar=$con->query($sentencia) or die("Error de datos".mysqli_error($con));
 
         if ($insertar) {
-            header("location:../app_estudiante.php");
-            echo "<script>alert('La observacion se ha enviada')</script>";
+            echo "<script type='text/javascript'>
+            alert('Se envio el compromiso correctamente');
+            window.location.href=' ../../obser/app_estudiante.php ';
+            </script>";
         }else{
-            echo "<script>alert('La observacion no se ha enviado')</script>";
+            echo "<script type='text/javascript'>
+            alert('No se puede enviar el compromiso');
+            window.location.href=' ../../obser/app_estudiante.php ';
+            </script>";
         }
     }else{
-        echo "<script>alert('El Usuario al que intenta enviar la observacion no existe')</script>";
+        echo "<script type='text/javascript'>
+            alert('El usuario al que intenta enviar el compromiso no existe');
+            window.location.href=' ../../obser/app_estudiante.php ';
+            </script>";
     }
 
 }

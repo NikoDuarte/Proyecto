@@ -7,7 +7,7 @@
 
 .content-all{
     width: 100%;
-    background-color: rgba(255, 238, 0, 0.603);
+    background-color: rgba(255, 187, 0, 0.493);
     margin: auto;
     margin-top: 80px;
 }
@@ -18,7 +18,7 @@ header{
     position: fixed;
     left: 0;
     top: 0;
-    background-color: rgba(255, 238, 0, 0.603);
+    background-color: rgba(255, 187, 0, 0.493);
 }
 
 #check{
@@ -51,7 +51,7 @@ header{
 }
 
 .menu li:hover{
-    background: rgba(255, 238, 0, 0.445);
+    background: rgba(255, 187, 0, 0.493);
 }
 
 

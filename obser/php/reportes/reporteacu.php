@@ -1,16 +1,16 @@
 <?php
 
 session_start();
+ob_start();
 
-$correo = $_SESSION['username'];
-
-
-if (!isset($_SESSION['username'])) {
-    header("location:../../php-login/login.php");
+$doc = $_SESSION['documento'];
+$nom = $_SESSION['username'];
+if (!isset($_SESSION['username'],$_SESSION['documento'])) {
+    header("location:../php-login/login.php");
 }
 
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,31 +31,60 @@ if (!isset($_SESSION['username'])) {
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check-menu">
-        <h2><a href="../../perfiles/mi_perfil_acu.php?correo=<?php echo $_SESSION['username'];?>">BIENVENIDO <?php echo $correo?></a></h2>
+        <h2><a href="../../perfiles/mi_perfil_acu.php?correo=<?php echo $_SESSION['documento'];?>">BIENVENIDO <?php echo $nom?></a></h2>
         <label for="check-menu" class="icon-menu">
             <img src="img/menu.svg" width="25" height="25">
         </label>
         <nav class="menu">
             <ul>
                 <li><a href="../../app_acudiente.php"> Inicio</a></li>
-                <li><a href="../..//perfiles/mi_perfil_acu.php?correo=<?php echo $_SESSION['username'];?>"> Mi perfil</a></li>
-                <li><a href="../../php-login/logout.php"> Cerrar Sesion</a></li>
+                <li><a href="../../perfiles/mi_perfil_acu.php?correo=<?php echo $_SESSION['documento'];?>"> Mi perfil</a></li>
+                <li><a href="../../../php-login/php/logout.php"> Cerrar Sesion</a></li>
             </ul>
         </nav>
     </div>
 <div id="main-container">
     <table>
         <thead>
-            <th>Quien hizo la observacion</th>
-            <th>Tipo</th>
-            <th>Fecha</th>
-            <th>Observacion</th>
+            <th>Tu(s) hijos son:</th>
+            <th>Documento</th>
         </thead>
 <?php
 include("../../php/conexion.php");
 $con = New Conexion();
 
-$consulta = $con->query("SELECT * FROM observaciones WHERE para = '".$_SESSION['username']."'");
+$consulta = $con->query("SELECT U.* FROM usuarios U, RELACION_ACU_EST r 
+WHERE u.documento=r.documento_estudiante AND r.documento_acudiente='".$_SESSION['documento']."'");
+while($row = mysqli_fetch_array($consulta)){
+
+?>
+
+    <tbody>
+        <tr>
+            <td><?php echo $row['nombre']?></td>
+            <td><?php echo $row['documento']?></td>
+        </tr>
+    </tbody>
+<?php }?>
+</table>
+<br><br><br><br>
+<h2 align="center" class="respuesta">Observaciones Hechas</h2>
+
+<div id="main-container">
+    <table>
+        <thead>
+            <th>Quien hizo la observacion</th>
+            <th>Para</th>
+            <th>Tipo</th>
+            <th>Fecha</th>
+            <th>Observacion</th>
+        </thead>
+<?php
+//include("../../php/conexion.php");
+$con = New Conexion();
+
+$consulta = $con->query("SELECT U.* FROM observaciones U, RELACION_ACU_EST r 
+WHERE u.para=r.documento_estudiante AND r.documento_acudiente='".$_SESSION['documento']."'");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>
@@ -63,6 +92,7 @@ while($row = mysqli_fetch_array($consulta)){
     <tbody>
         <tr>
             <td><?php echo $row['de']?></td>
+            <td><?php echo $row['para']?></td>
             <td><?php echo $row['tipo']?></td>
             <td><?php echo $row['fecha']?></td>
             <td><?php echo $row['observacion']?></td>

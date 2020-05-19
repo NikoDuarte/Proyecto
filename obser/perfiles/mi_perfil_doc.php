@@ -1,12 +1,13 @@
 <?php
 
+
 session_start();
+ob_start();
 
-$correo = $_SESSION['username'];
-
-
-if (!isset($_SESSION['username'])) {
-    header("location:../../php-login/login.php");
+$doc = $_SESSION['documento'];
+$nom = $_SESSION['username'];
+if (!isset($_SESSION['username'],$_SESSION['documento'])) {
+    header("location:../php-login/login.php");
 }
 
 
@@ -33,7 +34,7 @@ if (!isset($_SESSION['username'])) {
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check">
-        <h2><a href="">Bienvenido <?php echo $correo?></a></h2>
+        <h2><a href="">Bienvenido <?php echo $nom?></a></h2>
         <label for="check" class="icon-menu">
             <img src="../img/menu.svg" width="25" height="25">
         </label>
@@ -41,7 +42,7 @@ if (!isset($_SESSION['username'])) {
             <ul>
                 <li><a href="../app_docente.php">Inicio</a></li>
                 <li><a href="../php/reportes/reportedoc.php">Tus observaciones</a></li>
-                <li><a href="../../php-login/logout.php">Cerrar Sesion</a></li>
+                <li><a href="../../php-login/php/logout.php">Cerrar Sesion</a></li>
             </ul>
         </nav>
         
@@ -54,31 +55,27 @@ if (!isset($_SESSION['username'])) {
     <form action="" method="post">
       <input type="submit" class="consultar" name="consultar" id="boton" value="consulta mis datos">
       <?php 
-      include("../../php-login/conexion.php");  
+      include("../php/conexion.php");  
       $con = New Conexion();
       if (isset($_POST['consultar'])){
-      $correo = $_SESSION['username'];
-      $resultados = $con->query("SELECT * FROM usuarios WHERE correo = '$correo'");
+        $doc = $_SESSION['documento'];
+        $resultados = $con->query("SELECT * FROM usuarios WHERE documento = '$doc'");
       while ($consulta = mysqli_fetch_array($resultados)) {
       
       ?>
       <br><br><br>
-      <h2 class="titulo1">Tu nombre es:</h2>
+      <h2 class="titulo1">Tu nombre y apellido es:</h2>
       <input type="text" name="nombre" id="nombre" value="<?php  echo $consulta ['nombre'];?>" disabled>
-      <h2 class="titulo1">Tu apellido es:</h2>
-      <input type="text" name="apellido" id="apellido" value="<?php echo $consulta ['apellido'];?>" disabled>
       <br>
       <h2 class="titulo1">Tu institucion es:</h2>
       <input type="text" name="institucion" id="institucion" value="<?php echo $consulta ['institucion'];?>" disabled>
       <h2 class="titulo2">Tu sede es:</h2>
       <input type="text" name="sede" id="sede" value="<?php echo $consulta ['sede'];?>">
-      <h2 class="titulo2">Tu jornada es:</h2>
-      <input type="text" name="jornada" id="jornada" value="<?php echo $consulta ['jornada'];?>" disabled>
       <br>
       <h2 class="titulo2">Tu documento es:</h2>
       <input type="text" name="documento" id="documento" value="<?php echo $consulta ['documento'];?>" disabled>
       <h2 class="titulo2">Tu contraseña es:</h2>
-      <input type="text" name="password" id="documento" value="<?php echo $consulta ['password'];}}?>">
+      <input type="text" name="password" id="documento" value="<?php echo $consulta ['contraseña'];}}?>">
       <br>
       <input type="submit" class="modificar" name="actualizar" id="boton" value="actualizar datos">
     </form>
@@ -91,7 +88,7 @@ if (isset($_POST['actualizar']))
   $password = $_POST['password'];
 
 
-    $sql = $con->query("UPDATE usuarios SET sede = '$sede', password = '$password' WHERE correo = '$correo'");
+    $sql = $con->query("UPDATE usuarios SET sede = '$sede', contraseña = '$password' WHERE documento = '$doc'");
   if ($sql) {
     echo "<script type='text/javascript'>alert('Se inserto los registro correctamente');
     window.location.href='window.location='mi_perfil_doc.php?correo=$_SESSION[username]';</script>";

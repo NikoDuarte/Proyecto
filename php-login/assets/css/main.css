@@ -67,11 +67,16 @@ body {
 }
 
 .btn {
-  background: #00c8ff;
+  background: #ff7b00;
   color: #fff;
   font-size: 1.2rem;
   padding: 1rem 2rem;
   text-decoration: none;
+}
+
+.btn:hover{
+  background: #753900;
+  color: #fff;
 }
 
 @media (max-width: 960px) {

@@ -1,11 +1,11 @@
 <?php
 
 session_start();
+ob_start();
 
-$correo = $_SESSION['username'];
-
-
-if (!isset($_SESSION['username'])) {
+$doc = $_SESSION['documento'];
+$nom = $_SESSION['username'];
+if (!isset($_SESSION['username'],$_SESSION['documento'])) {
     header("location:../php-login/login.php");
 }
 
@@ -32,15 +32,15 @@ if (!isset($_SESSION['username'])) {
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check-menu">
-        <h2><a href="../../perfiles/mi_perfil_est.php?correo=<?php echo $_SESSION['username'];?>">BIENVENIDO <?php echo $correo?></a></h2>
+        <h2><a href="../../perfiles/mi_perfil_est.php?correo=<?php echo $_SESSION['documento'];?>">BIENVENIDO <?php echo $nom?></a></h2>
         <label for="check-menu" class="icon-menu">
             <img src="img/menu.svg" width="25" height="25">
         </label>
         <nav class="menu">
             <ul>
                 <li><a href="../../app_estudiante.php"> Inicio</a></li>
-                <li><a href="../../perfiles/mi_perfil_est.php?correo=<?php echo $_SESSION['username'];?>"> Mi perfil</a></li>
-                <li><a href="../php-login/logout.php"> Cerrar Sesion</a></li>
+                <li><a href="../../perfiles/mi_perfil_est.php?correo=<?php echo $_SESSION['documento'];?>"> Mi perfil</a></li>
+                <li><a href="../../../php-login/php/logout.php"> Cerrar Sesion</a></li>
             </ul>
         </nav>
     </div>
@@ -56,7 +56,7 @@ if (!isset($_SESSION['username'])) {
 include("../../php/conexion.php");
 $con = New Conexion();
 
-$consulta = $con->query("SELECT * FROM observaciones WHERE para = '".$_SESSION['username']."'");
+$consulta = $con->query("SELECT * FROM observaciones WHERE para = '".$_SESSION['documento']."'");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>

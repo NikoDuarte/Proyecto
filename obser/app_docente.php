@@ -1,11 +1,15 @@
 <?php
 
 session_start();
-$correo = $_SESSION['username'];
+ob_start();
 
-if (!isset($_SESSION['username'])) {
+$doc = $_SESSION['documento'];
+$nom = $_SESSION['username'];
+if (!isset($_SESSION['username'],$_SESSION['documento'])) {
     header("location:../php-login/login.php");
 }
+
+
 ?>
 
 
@@ -105,8 +109,8 @@ if (!isset($_SESSION['username'])) {
 						
 						$sede = $_GET["sede"];
                         $curso = $_GET["curso"];
-                        $resultados = $con->query("SELECT  correo AS nombre FROM usuarios WHERE curso = '$curso'");
-						/*$resultados = $con->query("SELECT  CONCAT(nombre,'_',apellido) AS nombre FROM usuarios WHERE curso = '$curso'");*/
+                        $resultados = $con->query("SELECT concat(documento,'_',replace(nombre,' ','_')) as nombre FROM usuarios WHERE curso = '$curso'");
+                        /*$resultados = $con->query("SELECT  CONCAT(nombre,'_',documento) AS nombre FROM usuarios WHERE curso = '$curso'");*/
 						while ($consulta = mysqli_fetch_array($resultados)) {
 							echo "<option value=".$consulta ['nombre'].">".$consulta ['nombre']."</option>";
 							
@@ -126,15 +130,15 @@ if (!isset($_SESSION['username'])) {
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check">
-        <h2><a href="../obser/perfiles/mi_perfil_doc.php?correo=<?php echo $_SESSION['username'];?>">BIENVENIDO <?php echo $correo?></a></h2>
+        <h2><a href="../obser/perfiles/mi_perfil_doc.php?documento=<?php echo $_SESSION['documento'];?>">BIENVENIDO <?php echo $nom?></a></h2>
         <label for="check" class="icon-menu">
             <img src="img/menu.svg" width="25" height="25">
         </label>
         <nav class="menu">
             <ul>
-                <li><a href="../obser/perfiles/mi_perfil_doc.php?correo=<?php echo $_SESSION['username'];?>"> Mi perfil </a></li>
+                <li><a href="../obser/perfiles/mi_perfil_doc.php?documento=<?php echo $_SESSION['documento'];?>"> Mi perfil </a></li>
                 <li><a href="php/reportes/reportedoc.php"> Tus observaciones </a></li>
-                <li><a href="../php-login/logout.php"> Cerrar Sesion </a></li>
+                <li><a href="../php-login/php/logout.php"> Cerrar Sesion </a></li>
             </ul>
         </nav>
     </div>
@@ -144,12 +148,11 @@ if (!isset($_SESSION['username'])) {
 <div class="contenedor-menu">
 		<a href="#" class="btn-menu">Menu</a>
 		<ul class="submenu">
-            <li class="activado"><a href="../obser/app.php">Inicia La Observacion</a></li>
+            <li class="activado"><a href="../obser/app_docente.php">Inicia La Observacion</a></li>
             <li><a href="#">Sede</a>
 				<ul>
 					<li><a class="add_sede" href="?sede=principal">Principal</a></li>
 					<li><a class="add_sede" href="?sede=tarde">Tarde</a></li>
-                    <li><a href="#">##</a></li>
 				</ul>
 			</li>
 			<li><a href="#">Curso</a>
@@ -160,7 +163,8 @@ if (!isset($_SESSION['username'])) {
 			</li>
 			<li><a href="#">Alumno</i></a>
 				<ul>
-					<li><a href="javascript:Alumno()" id="alumno">Nombre</a></li>
+                    <li><a href="javascript:Alumno()" id="alumno">Nombre</a></li>
+                    <li><a href="javascript:Documento()" id="documento">Documento</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -228,6 +232,25 @@ function continuar3() {
     }
 </script>
 
+<script>
+
+function Documento() {
+document.getElementById("documento")
+.style.display="block";
+}
+
+function cerrar4() {
+    document.getElementById("documento")
+    .style.display="none";
+}
+
+function continuar4() {
+        document.getElementById("documento")
+        .style.display="none";
+    }
+</script>
+
+
     <!--Observaciones-->
     <div align="center">
     <a class="boton" href="#" target="_blank">Observaciones Recientes</a>
@@ -241,6 +264,8 @@ function continuar3() {
             <div class="fakeobser" style="height:300px;">
                 <form action="php/mensajedoc.php" method="post"> 
                     <input type="text" placeholder="Nombre del Estudiante..." name="estudiante" value="<?php echo $_GET["alumno"]; ?>">
+                    <br>
+                    <!--<input type="text" placeholder="Documento..." name="documento" value="<?php //echo $_GET["documento"]; ?>">--> 
                     <input type="text" placeholder="Grado..." name="grado" value="<?php echo $_GET["grado"]; ?>"> 
                     <input type="text" placeholder="Curso...." name="curso" value="<?php echo $_GET["curso"]; ?>">
                 <select name="tipo" class="tipoobser">
