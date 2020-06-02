@@ -3,9 +3,7 @@
     ob_start();
 
 $nom=$_POST['nom'];
-$inst=$_POST['inst'];
 $doc = $_POST['doc'];
-$quien_eres=$_POST['quien_eres'];
 $pass=$_POST['pass'];
 
 
@@ -13,7 +11,7 @@ $existe = valida($nom,$doc);
 
 if ($existe>0){
 
-$arreglo =consulta($nom,$doc,$inst,$quien_eres,$pass);
+$arreglo =consulta($nom,$doc,$pass);
 
 
 switch ($arreglo[1]) {
@@ -52,13 +50,13 @@ return $numfilas;
 }
 
 
-function consulta($nom,$doc,$inst,$quien_eres,$pass)
+function consulta($nom,$doc,$pass)
 {
 
 //include("conexion.php");  
 $con = New Conexion();
 $consulta=$con->query("SELECT nombre,documento,institucion,contraseña,rol FROM usuarios
-WHERE nombre='$nom' and documento='$doc' and contraseña='$pass' and institucion='$inst' and rol='$quien_eres'");
+WHERE nombre='$nom' and documento='$doc' and contraseña='$pass'");
 
 
 $numfilas = $consulta->num_rows;

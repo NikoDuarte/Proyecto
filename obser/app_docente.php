@@ -130,7 +130,7 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check">
-        <h2><a href="../obser/perfiles/mi_perfil_doc.php?documento=<?php echo $_SESSION['documento'];?>">BIENVENIDO <?php echo $nom?></a></h2>
+        <h2><a href="../obser/perfiles/mi_perfil_doc.php?documento=<?php echo $_SESSION['documento'];?>">Bienvenido <?php echo $nom?></a></h2>
         <label for="check" class="icon-menu">
             <img src="img/menu.svg" width="25" height="25">
         </label>
@@ -151,8 +151,18 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
             <li class="activado"><a href="../obser/app_docente.php">Inicia La Observacion</a></li>
             <li><a href="#">Sede</a>
 				<ul>
-					<li><a class="add_sede" href="?sede=principal">Principal</a></li>
-					<li><a class="add_sede" href="?sede=tarde">Tarde</a></li>
+                <?php 
+                        $con = New Conexion();
+                        $consulta = $con->query("SELECT DISTINCT sede FROM usuarios WHERE documento='".$_SESSION['documento']."'");
+                        while($row = mysqli_fetch_array($consulta)){
+
+                    ?>
+					<li>
+                        <a class="add_sede" href="?sede=<?php echo $row['sede']?>">
+                        <?php echo $row['sede']?>
+                        </a>
+                    </li>
+                    <?php }?>
 				</ul>
 			</li>
 			<li><a href="#">Curso</a>
@@ -164,7 +174,6 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
 			<li><a href="#">Alumno</i></a>
 				<ul>
                     <li><a href="javascript:Alumno()" id="alumno">Nombre</a></li>
-                    <li><a href="javascript:Documento()" id="documento">Documento</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -252,9 +261,6 @@ function continuar4() {
 
 
     <!--Observaciones-->
-    <div align="center">
-    <a class="boton" href="#" target="_blank">Observaciones Recientes</a>
-    </div>
     <div class="row">            
         <div class="side">
         <br>
@@ -265,7 +271,6 @@ function continuar4() {
                 <form action="php/mensajedoc.php" method="post"> 
                     <input type="text" placeholder="Nombre del Estudiante..." name="estudiante" value="<?php echo $_GET["alumno"]; ?>">
                     <br>
-                    <!--<input type="text" placeholder="Documento..." name="documento" value="<?php //echo $_GET["documento"]; ?>">--> 
                     <input type="text" placeholder="Grado..." name="grado" value="<?php echo $_GET["grado"]; ?>"> 
                     <input type="text" placeholder="Curso...." name="curso" value="<?php echo $_GET["curso"]; ?>">
                 <select name="tipo" class="tipoobser">

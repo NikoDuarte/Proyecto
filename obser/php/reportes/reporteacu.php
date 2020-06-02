@@ -31,7 +31,7 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check-menu">
-        <h2><a href="../../perfiles/mi_perfil_acu.php?correo=<?php echo $_SESSION['documento'];?>">BIENVENIDO <?php echo $nom?></a></h2>
+        <h2><a href="../../perfiles/mi_perfil_acu.php?correo=<?php echo $_SESSION['documento'];?>">Bienvenido <?php echo $nom?></a></h2>
         <label for="check-menu" class="icon-menu">
             <img src="img/menu.svg" width="25" height="25">
         </label>
@@ -47,6 +47,8 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
     <table>
         <thead>
             <th>Tu(s) hijos son:</th>
+            <th>Institucion</th>
+            <th>Curso</th>
             <th>Documento</th>
         </thead>
 <?php
@@ -62,6 +64,8 @@ while($row = mysqli_fetch_array($consulta)){
     <tbody>
         <tr>
             <td><?php echo $row['nombre']?></td>
+            <td><?php echo $row['institucion']?></td>
+            <td><?php echo $row['curso']?></td>
             <td><?php echo $row['documento']?></td>
         </tr>
     </tbody>

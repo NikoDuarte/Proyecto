@@ -32,7 +32,7 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check-menu">
-        <h2><a href="../../perfiles/mi_perfil_doc.php?correo=<?php echo $_SESSION['documento'];?>">BIENVENIDO <?php echo $nom?></a></h2>
+        <h2><a href="../../perfiles/mi_perfil_doc.php?correo=<?php echo $_SESSION['documento'];?>">Bienvenido <?php echo $nom?></a></h2>
         <label for="check-menu" class="icon-menu">
             <img src="img/menu.svg" width="25" height="25">
         </label>

@@ -3,7 +3,6 @@
     ob_start();
 
 $nom=$_POST['nom'];
-$inst=$_POST['inst'];
 $doc=$_POST['doc'];
 $pass=$_POST['pass'];
 
@@ -12,7 +11,7 @@ $existe = valida($doc);
 
 if ($existe>0){
 
-$arreglo =consulta($nom,$inst,$doc,$pass);
+$arreglo =consulta($nom,$doc,$pass);
 
 
 switch ($arreglo[1]) {
@@ -46,13 +45,13 @@ return $numfilas;
 }
 
 
-function consulta($nom,$inst,$doc,$pass)
+function consulta($nom,$doc,$pass)
 {
 
 //include("conexion.php");  
  $con = New Conexion();
- $consulta="SELECT * FROM acudiente WHERE nombre='$nom' and contraseña='$pass'
-and institucion='$inst' and documento='$doc' and rol='acudiente'";
+    $consulta="SELECT * FROM acudiente WHERE nombre='$nom' and contraseña='$pass'
+    and documento='$doc' and rol='acudiente'";
 
 $resultado=$con->query($consulta) or die("Error de datos".mysqli_error($con));
 

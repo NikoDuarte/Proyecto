@@ -52,7 +52,7 @@ form{
     height: 100px;
 }
 
-.login-content h2{
+.login-content .h2 {
 	margin: 15px 0;
 	color: #333;
 	text-transform: uppercase;

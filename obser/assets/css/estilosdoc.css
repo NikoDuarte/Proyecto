@@ -40,6 +40,20 @@
     cursor: pointer;
 }
 
+.ventana_grado .grado{
+	text-align: center;
+	font-size: 16px;
+	width: 75%;
+	height: 30px;
+	border: 1px solid gray;
+	margin-bottom: 3px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+
 .ventana_grado [type="text"]{
 	text-align: center;
 	font-size: 16px;
@@ -88,6 +102,20 @@
     cursor: pointer;
 }
 
+.ventana_curso .curso{
+	text-align: center;
+	font-size: 16px;
+	width: 75%;
+	height: 30px;
+	border: 1px solid gray;
+	margin-bottom: 3px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+
 .ventana_curso [type="text"]{
 	text-align: center;
 	font-size: 16px;
@@ -135,6 +163,20 @@
     border-radius: 15px; /*bordes redondos*/
     cursor: pointer;
 }
+
+.ventana_alumno .alumno{
+	text-align: center;
+	font-size: 16px;
+	width: 75%;
+	height: 30px;
+	border: 1px solid gray;
+	margin-bottom: 3px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
 
 .ventana_alumno [type="text"]{
 	text-align: center;

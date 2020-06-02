@@ -128,7 +128,7 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check">
-        <h2><a href="../obser/perfiles/mi_perfil_acu.php?documento=<?php echo $_SESSION['documento'];?>">BIENVENIDO <?php echo $nom?></a></h2>
+        <h2><a href="../obser/perfiles/mi_perfil_acu.php?documento=<?php echo $_SESSION['documento'];?>">Bienvenido <?php echo $nom?></a></h2>
         <label for="check" class="icon-menu">
             <img src="img/menu.svg" width="25" height="25">
         </label>
@@ -149,7 +149,18 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
             <li class="activado"><a href="../obser/app_acudiente.php">Iniciar Compromiso</a></li>
             <li><a href="#">Sede</a>
 				<ul>
-					<li><a class="add_sede" href="?sede=principal">Principal</a></li>
+                <?php 
+                        $con = New Conexion();
+                        $consulta = $con->query("SELECT DISTINCT sede FROM usuarios WHERE documento='".$_SESSION['documento']."'");
+                        while($row = mysqli_fetch_array($consulta)){
+
+                    ?>
+					<li>
+                        <a class="add_sede" href="?sede=<?php echo $row['sede']?>">
+                        <?php echo $row['sede']?>
+                        </a>
+                    </li>
+                    <?php }?>
 				</ul>
 			</li>
 			<li><a href="#">Docente</i></a>
@@ -247,11 +258,11 @@ function continuar4() {
         <br>
             <div class=side2>
                 <h2>Observacion</h2>
-                <h3> Ingrese la Observacion </h3>
             <div class="fakeobser" style="height:300px;">
                 <form action="php/mensajesacu.php" method="post"> 
                     <input type="text" placeholder="Nombre del Docente..." name="docente" value="<?php echo $_GET["alumno"]; ?>">
                     <br><br>
+                    <h2>Compromiso Familiar</h2>
         <br>
         <br>
             <textarea class="form-control" type="textarea" name="obser" id="form" maxlength="650" rows="10">

@@ -127,7 +127,7 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check-menu">
-        <h2><a href="../obser/perfiles/mi_perfil_est.php?documento=<?php echo $_SESSION['documento'];?>">BIENVENIDO <?php echo $nom?></a></h2>
+        <h2><a href="../obser/perfiles/mi_perfil_est.php?documento=<?php echo $_SESSION['documento'];?>">Bienvenido <?php echo $nom?></a></h2>
         <label for="check-menu" class="icon-menu">
             <img src="img/menu.svg" width="25" height="25">
         </label>
@@ -148,8 +148,19 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
 		<ul class="submenu">
             <li class="activado"><a href="../obser/app_estudiante.php">Iniciar</a></li>
             <li><a href="#">Sede</a>
-				<ul>
-					<li><a class="add_sede" href="?sede=principal">Principal</a></li>
+				<ul>                        
+                    <?php 
+                        $con = New Conexion();
+                        $consulta = $con->query("SELECT DISTINCT * FROM usuarios WHERE documento='".$_SESSION['documento']."'");
+                        while($row = mysqli_fetch_array($consulta)){
+
+                    ?>
+					<li>
+                        <a class="add_sede" href="?sede=<?php echo $row['sede']?>">
+                        <?php echo $row['sede']?>
+                        </a>
+                    </li>
+                    <?php }?>
 				</ul>
 			</li>
 			<li><a href="#">Docente</i></a>

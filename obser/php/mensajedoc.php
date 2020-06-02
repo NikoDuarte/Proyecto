@@ -33,12 +33,21 @@ if (isset($_POST['observacion'])) {
 
         if ($insertar) {
             //header("location:../app_docente.php");
-            echo "<script>alert('La observacion se ha enviada')</script>";
+            echo "<script type='text/javascript'>
+            alert('Se guardo la observacion ');
+            window.location.href=' ../../obser/app_docente.php ';
+            </script>";
         }else{
-            echo "<script>alert('La observacion no se ha enviado')</script>";
+            echo "<script type='text/javascript'>
+            alert('No se guardo con exito');
+            window.location.href=' ../../obser/app_docente.php ';
+            </script>";
         }
     }else{
-        echo "<script>alert('El Usuario al que intenta enviar la observacion no existe')</script>";
+        echo "<script type='text/javascript'>
+        alert('No se ha encontrado el alumno al que intenta hacer la observacion');
+        window.location.href=' ../../obser/app_docente.php ';
+        </script>";
         //header("location:../app_docente.php");
     }
 }
