@@ -34,7 +34,7 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check">
-        <h2><a href="">Bienvenido <?php echo $nom?></a></h2>
+        <h2><a href=""><?php echo $nom?></a></h2>
         <label for="check" class="icon-menu">
             <img src="../img/menu.svg" width="25" height="25">
         </label>

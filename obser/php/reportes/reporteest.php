@@ -6,7 +6,7 @@ ob_start();
 $doc = $_SESSION['documento'];
 $nom = $_SESSION['username'];
 if (!isset($_SESSION['username'],$_SESSION['documento'])) {
-    header("location:../php-login/login.php");
+    header("location:../php-login/login.html");
 }
 
 
@@ -32,7 +32,7 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check-menu">
-        <h2><a href="../../perfiles/mi_perfil_est.php?correo=<?php echo $_SESSION['documento'];?>">Bienvenido <?php echo $nom?></a></h2>
+        <h2><a href="../../perfiles/mi_perfil_est.php?correo=<?php echo $_SESSION['documento'];?>"><?php echo $nom?></a></h2>
         <label for="check-menu" class="icon-menu">
             <img src="img/menu.svg" width="25" height="25">
         </label>
@@ -56,7 +56,7 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
 include("../../php/conexion.php");
 $con = New Conexion();
 
-$consulta = $con->query("SELECT * FROM observaciones WHERE para = '".$_SESSION['documento']."'");
+$consulta = $con->query("SELECT * FROM observaciones WHERE para = '".$_SESSION['username']."' and curso = 'curso'");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>

@@ -15,13 +15,13 @@ $arreglo =consulta($nom,$doc,$pass);
 
 
 switch ($arreglo[1]) {
-    case "estudiante":
+    case "Estudiante":
         
         $_SESSION['documento'] = $doc;
         $_SESSION['username'] = $nom;
         header("location:../../obser/app_estudiante.php");
         break;
-    case "docente":
+    case "Docente":
         $_SESSION['documento'] = $doc;
         $_SESSION['username'] = $nom;
         header("location:../../obser/app_docente.php");

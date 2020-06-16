@@ -22,6 +22,7 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
     <title>app | Acudiente</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/estilosacu.css">
+    <script src="assets/js/push.min.js"></script>
     <style>
         body{
             background-image: url(img/imagenacu.jpg);
@@ -128,7 +129,7 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check">
-        <h2><a href="../obser/perfiles/mi_perfil_acu.php?documento=<?php echo $_SESSION['documento'];?>">Bienvenido <?php echo $nom?></a></h2>
+        <h2><a href="../obser/perfiles/mi_perfil_acu.php?documento=<?php echo $_SESSION['documento'];?>"><?php echo $nom?></a></h2>
         <label for="check" class="icon-menu">
             <img src="img/menu.svg" width="25" height="25">
         </label>
@@ -172,6 +173,31 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
 </div>
 </div>
 </section>
+
+
+    <!--Observaciones-->
+    <div class="row">            
+        <div class="side">
+        <br>
+            <div class=side2>
+                <h2>Observacion</h2>
+            <div class="fakeobser" style="height:300px;">
+                <form action="php/mensajesacu.php" method="post"> 
+                    <input type="text" placeholder="Nombre del Docente..." name="docente" value="<?php echo $_GET["alumno"]; ?>">
+                    <br><br>
+                    <h2>Compromiso Familiar</h2>
+        <br>
+        <br>
+            <textarea class="form-control" type="textarea" name="obser" id="form" maxlength="650" rows="10">
+            </textarea>
+        <br>
+        <br>
+            <input type="submit" value="Enviar Observacion" name="observacion">
+        </form>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="assets/js/main.js"></script>
 
@@ -251,30 +277,17 @@ function continuar4() {
     }
 </script>
 
-
-    <!--Observaciones-->
-    <div class="row">            
-        <div class="side">
-        <br>
-            <div class=side2>
-                <h2>Observacion</h2>
-            <div class="fakeobser" style="height:300px;">
-                <form action="php/mensajesacu.php" method="post"> 
-                    <input type="text" placeholder="Nombre del Docente..." name="docente" value="<?php echo $_GET["alumno"]; ?>">
-                    <br><br>
-                    <h2>Compromiso Familiar</h2>
-        <br>
-        <br>
-            <textarea class="form-control" type="textarea" name="obser" id="form" maxlength="650" rows="10">
-            </textarea>
-        <br>
-        <br>
-            <input type="submit" value="Enviar Observacion" name="observacion">
-        </form>
-            </div>
-        </div>
-    </div>
-</div>
+<script>
+        Push.create("BIENVENIDO <?php echo $nom?>",{
+            body: "Mira tus obserbaciones",
+            icon: "img/noti.png",
+            timeout: 5000,
+            onClick: function () {
+                window.location="php/reportes/reporteacu.php";
+                this.close();
+            }
+        });
+    </script>
 
 
 
