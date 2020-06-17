@@ -5,9 +5,9 @@ session_start();
 ob_start();
 
 $doc = $_SESSION['documento'];
-$nom = $_SESSION['username'];
-if (!isset($_SESSION['username'],$_SESSION['documento'])) {
-    header("location:../php-login/login.php");
+$_SESSION['nombre'];
+if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
+    header("location:../php-login/login.html");
 }
 
 
@@ -34,7 +34,7 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check">
-        <h2><a href=""><?php echo $nom?></a></h2>
+        <h2><a href=""><?php echo $_SESSION['nombre']?></a></h2>
         <label for="check" class="icon-menu">
             <img src="../img/menu.svg" width="25" height="25">
         </label>
@@ -77,7 +77,7 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
       <h2 class="titulo2">Tu documento es:</h2>
       <input type="text" name="documento" id="documento" value="<?php echo $consulta ['documento'];?>" disabled>
       <h2 class="titulo2">Tu contraseña es:</h2>
-      <input type="text" name="password" id="documento" value="<?php echo $consulta ['contraseña'];}}?>">
+      <input type="text" name="password" id="documento" value="<?php echo $consulta ['password'];}}?>">
       <br>
       <input type="submit" class="modificar" name="actualizar" id="boton" value="actualizar datos">
     </form>
@@ -89,13 +89,17 @@ if (isset($_POST['actualizar']))
   $password = $_POST['password'];
 
 
-    $sql = $con->query("UPDATE usuarios SET contraseña = '$password' WHERE documento = '$doc'");
+    $sql = $con->query("UPDATE usuarios SET password = '$password' WHERE documento = '$doc'");
   if ($sql) {
-    echo "<script type='text/javascript'>alert('Se inserto los registro correctamente');
-    window.location.href='window.location='mi_perfil_doc.php?correo=$_SESSION[username]';</script>";
-    echo "se ha modificado exitosamente su usuario";
+    echo "<script type='text/javascript'>
+    alert('Se han cambiado sus datos exitosamente');
+    window.location.href='mi_perfil_est.php?correo=$_SESSION[documento]';
+    </script>";
   }else{
-  echo "No se pudo hacer ningun cambio.";
+  echo "<script type='text/javascript'>
+  alert('No se han podido cambiar sus datos');
+  window.location.href='mi_perfil_est.php?correo=$_SESSION[documento]';
+  </script>";
 }
 }
 ?>

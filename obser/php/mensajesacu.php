@@ -4,8 +4,8 @@ session_start();
 ob_start();
 
 $doc = $_SESSION['documento'];
-$nom = $_SESSION['username'];
-if (!isset($_SESSION['username'],$_SESSION['documento'])) {
+$nom = $_SESSION['nombre'];
+if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
     header("location:../php-login/login.php");
 }
 
@@ -26,7 +26,7 @@ if (isset($_POST['observacion'])) {
 
     if ($contar != 0) {
 
-        $sentencia="INSERT INTO respuesta (de,para,fecha,compromiso) values('".$_SESSION['username']."','".$row['documento']."',now(),'$observacion')"; 
+        $sentencia="INSERT INTO respuesta (de,para,fecha,compromiso) values('".$_SESSION['nombre']."','".$row['documento']."',now(),'$observacion')"; 
          $insertar=$con->query($sentencia) or die("Error de datos".mysqli_error($con));
 
         if ($insertar) {

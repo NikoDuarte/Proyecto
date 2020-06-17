@@ -4,8 +4,8 @@ session_start();
 ob_start();
 
 $doc = $_SESSION['documento'];
-$nom = $_SESSION['username'];
-if (!isset($_SESSION['username'],$_SESSION['documento'])) {
+$_SESSION['nombre'];
+if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
     header("location:../php-login/login.php");
 }
 
@@ -131,7 +131,7 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check">
-        <h2><a href="../obser/perfiles/mi_perfil_doc.php?documento=<?php echo $_SESSION['documento'];?>"><?php echo $nom?></a></h2>
+        <h2><a href="../obser/perfiles/mi_perfil_doc.php?documento=<?php echo $_SESSION['documento'];?>"><?php echo $_SESSION['nombre']?></a></h2>
         <label for="check" class="icon-menu">
             <img src="img/menu.svg" width="25" height="25">
         </label>
@@ -294,7 +294,7 @@ function continuar4() {
 </script>
 
 <script>
-        Push.create("BIENVENIDO <?php echo $nom?>",{
+        Push.create("BIENVENIDO <?php echo $_SESSION['nombre']?>",{
             body: "Mira tus obserbaciones",
             icon: "img/noti.png",
             timeout: 5000,

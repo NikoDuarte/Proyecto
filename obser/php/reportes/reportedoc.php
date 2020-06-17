@@ -4,8 +4,8 @@ session_start();
 ob_start();
 
 $doc = $_SESSION['documento'];
-$nom = $_SESSION['username'];
-if (!isset($_SESSION['username'],$_SESSION['documento'])) {
+$nom = $_SESSION['nombre'];
+if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
     header("location:../php-login/login.php");
 }
 
@@ -56,7 +56,7 @@ if (!isset($_SESSION['username'],$_SESSION['documento'])) {
 include("../../php/conexion.php");
 $con = New Conexion();
 
-$consulta = $con->query("SELECT * FROM observaciones WHERE de = '".$_SESSION['username']."'");
+$consulta = $con->query("SELECT * FROM observaciones WHERE de = '".$_SESSION['nombre']."'");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>

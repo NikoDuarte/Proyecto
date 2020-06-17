@@ -4,8 +4,8 @@ session_start();
 ob_start();
 
 $doc = $_SESSION['documento'];
-$nom = $_SESSION['username'];
-if (!isset($_SESSION['username'],$_SESSION['documento'])) {
+$nom = $_SESSION['nombre'];
+if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
     header("location:../php-login/login.php");
 }
 
@@ -84,11 +84,15 @@ if (isset($_POST['actualizar']))
 
     $sql = $con->query("UPDATE acudiente SET  contraseña='$contra' WHERE nombre='$nom'");
   if ($sql) {
-    echo "<script type='text/javascript'>alert('Se inserto los registro correctamente');
-    window.location.href='window.location='mi_perfil_doc.php?correo=$_SESSION[username]';</script>";
-    echo "<script type='text/javascript'>alert('se ha modificado exitosamente su usuario;</script>')";
+    echo "<script type='text/javascript'>
+    alert('Se han cambiado sus datos exitosamente');
+    window.location.href='mi_perfil_acu.php?correo=$_SESSION[documento]';
+    </script>";
   }else{
-  echo "No se pudo hacer ningun cambio.";
+  echo "<script type='text/javascript'>
+  alert('No se han podido cambiar sus datos');
+  window.location.href='mi_perfil_est.php?correo=$_SESSION[documento]';
+  </script>";
 }
 }
 
