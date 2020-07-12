@@ -30,37 +30,10 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
     </style>
 </head>
 <body>
-    <!--POPUPS_GRADO-->
-    <div class="ventana_grado" id="grado">
-        <div id="cerrar"> 
-        <a href="javascript:cerrar1()"><img src="img/close.png" alt=""></a>
-        </div>   
-        Escoge el grado
-    <br>
-    <br>
-		<form  method="get">
-            <select class="grado" name="grado">
-                <option> SELECCIONE EL GRADO</option>
-            <?php 	include("php/conexion.php");  
-						
-						$con = New Conexion();
-						
-						$sede = $_GET["sede"];
-						$resultados = $con->query("SELECT DISTINCT grado FROM usuarios WHERE sede = '$sede'");
-						while ($consulta = mysqli_fetch_array($resultados)) {
-							echo "<option value=".$consulta ['grado'].">".$consulta ['grado']."</option>";
-							
-						}
-			?>
-            </select>
-        <br>
-        <br>
-		    <input name="sede" value="<?php echo $sede ?>" type="text" readonly> 
-        <br>
-        <br>
-		    <input class="boton" type="submit" value="Continuar">
-		</form> 
-    </div>
+<?php 	include("php/conexion.php");  
+		$con = New Conexion();
+?>
+
 
     
     <!--POPUP_CURSO-->
@@ -78,8 +51,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 			
 			$con = New Conexion();
 			$sede = $_GET["sede"];
-			$grado = $_GET["grado"];
-			$resultados = $con->query("SELECT DISTINCT curso FROM usuarios WHERE grado = '$grado'");
+			$resultados = $con->query("SELECT DISTINCT curso FROM usuarios WHERE sede = '$sede'");
 			while ($consulta = mysqli_fetch_array($resultados)) {
 			echo "<option value=".$consulta ['curso'].">".$consulta ['curso']."</option>";
 				}
@@ -88,7 +60,6 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
         <br>
         <br>
 		    <input name="sede" value="<?php echo $sede ?>" type="text" readonly> 
-		    <input name="grado" value="<?php echo $grado ?>" type="text" readonly>
         <br>
 		<input class="boton" type="submit" value="Continuar">
 		</form> 
@@ -111,7 +82,6 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 						$sede = $_GET["sede"];
                         $curso = $_GET["curso"];
                         $resultados = $con->query("SELECT concat(documento,'_',replace(nombre,' ','_')) as nombre FROM usuarios WHERE curso = '$curso'");
-                        /*$resultados = $con->query("SELECT  CONCAT(nombre,'_',documento) AS nombre FROM usuarios WHERE curso = '$curso'");*/
 						while ($consulta = mysqli_fetch_array($resultados)) {
 							echo "<option value=".$consulta ['nombre'].">".$consulta ['nombre']."</option>";
 							
@@ -121,7 +91,6 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
             <br>
             <br>
 		    <input name="sede" value="<?php  echo $sede ?>" type="text" readonly> 
-		    <input name="grado" value="<?php echo $grado ?>" type="text" readonly>
 		    <input name="curso" value="<?php echo $curso ?>" type="text" readonly> 
         <br>
 		<input class="boton" type="submit" value="Continuar">
@@ -149,8 +118,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 <div class="contenedor-menu">
 		<a href="#" class="btn-menu">Menu</a>
 		<ul class="submenu">
-            <li class="activado"><a href="../obser/app_docente.php">Inicia La Observacion</a></li>
-            <li><a href="#">Sede</a>
+            <li class="activado"><a href="#">Sede</a>
 				<ul>
                 <?php 
                         $con = New Conexion();
@@ -168,7 +136,6 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 			</li>
 			<li><a href="#">Curso</a>
 				<ul>
-					<li><a href="javascript:Grado()" id="grado">Grado</a></li>
 					<li><a href="javascript:Curso()" id="curso">Curso</a></li>
 				</ul>
 			</li>
@@ -192,10 +159,17 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
                 <h3> Ingrese la Observacion </h3>
             <div class="fakeobser" style="height:300px;">
                 <form action="php/mensajedoc.php" method="post"> 
-                    <input type="text" placeholder="Nombre del Estudiante..." name="estudiante" value="<?php echo $_GET["alumno"]; ?>">
+                    <input type="text" placeholder="Nombre del Estudiante..." name="estudiante" readonly value="<?php if (!isset($_GET["alumno"])){
+
+                    }else{
+                        echo $_GET["alumno"];
+                    }?>">
                     <br>
-                    <input type="text" placeholder="Grado..." name="grado" value="<?php echo $_GET["grado"]; ?>"> 
-                    <input type="text" placeholder="Curso...." name="curso" value="<?php echo $_GET["curso"]; ?>">
+                    <input type="text" placeholder="Curso...." name="curso" readonly value="<?php if (!isset($_GET["curso"])){
+
+                    }else{
+                        echo $_GET["curso"];
+                    }?>">
                 <select name="tipo" class="tipoobser">
                     <option>SELECCIONA UN TIPO</option>
                     <option value="disciplina">Disciplinaria</option>
@@ -222,22 +196,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 		var sede="principal";
 	return sede;
     }
-	
-    function Grado() {
-    document.getElementById("grado")
-    .style.display="block";
-    }
-
-    function cerrar1() {
-        document.getElementById("grado")
-        .style.display="none";
-    }
-
-    function continuar1() {
-        document.getElementById("grado")
-        .style.display="none";
-    }
-    </script>
+</script>
 
     <script>
     function Curso() {

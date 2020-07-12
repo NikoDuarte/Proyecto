@@ -28,98 +28,36 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
     </style>
 </head>
 <body>
-        <!--POPUPS_GRADO-->
-        <div class="ventana_grado" id="grado">
-        <div id="cerrar"> 
-        <a href="javascript:cerrar1()"><img src="img/close.png" alt=""></a>
-        </div>   
-        Escoge el grado
-    <br>
-    <br>
-		<form  method="get">
-            <select class="grado" name="grado">
-                <option> SELECCIONE EL GRADO</option>
-            <?php 	include("php/conexion.php");  
-						
-						$con = New Conexion();
-						
-						$sede = $_GET["sede"];
-						$resultados = $con->query("SELECT DISTINCT grado FROM usuarios WHERE sede = '$sede'");
-						while ($consulta = mysqli_fetch_array($resultados)) {
-							echo "<option value=".$consulta ['grado'].">".$consulta ['grado']."</option>";
-							
-						}
-			?>
-            </select>
-        <br>
-        <br>
-		    <input name="sede" value="<?php echo $sede ?>" type="text" readonly> 
-        <br>
-        <br>
-		    <input class="boton" type="submit" value="Continuar">
-		</form> 
-    </div>
+<?php
 
-    
-    <!--POPUP_CURSO-->
-    <div class="ventana_curso" id="curso">
-        <div id="cerrar"> 
-            <a href="javascript:cerrar2()"><img src="img/close.png" alt=""></a>
-        </div>
-        Escoge el Curso
-        <br>
-        <br>
-		<form  method="get">
-                <select class="curso" name="curso">
-                    <option> SELECCIONE EL CURSO</option>
-            <?php   
-			
-			$con = New Conexion();
-			$sede = $_GET["sede"];
-			$grado = $_GET["grado"];
-			$resultados = $con->query("SELECT DISTINCT curso FROM usuarios WHERE grado = '$grado'");
-			while ($consulta = mysqli_fetch_array($resultados)) {
-			echo "<option value=".$consulta ['curso'].">".$consulta ['curso']."</option>";
-				}
-			?>
-                </select>
-        <br>
-        <br>
-		    <input name="sede" value="<?php echo $sede ?>" type="text" readonly> 
-		    <input name="grado" value="<?php echo $grado ?>" type="text" readonly>
-        <br>
-		<input class="boton" type="submit" value="Continuar">
-		</form> 
-    </div>
-    <!--POPUP_ALUMNO-->
+include_once("php/conexion.php");
+
+?>
+<!--POPUP_ALUMNO-->
     <div class="ventana_alumno" id="alumno">
         <div id="cerrar"> 
             <a href="javascript:cerrar3()"><img src="img/close.png" alt=""></a>
         </div>
-            Escoge el Alumno
+            Escoge el Docente
             <br>
             <br>
 		<form> 
             <select class="alumno" name="alumno">
-                <option> SELECCIONE EL ALUMNO</option>
+                <option> SELECCIONE EL DOCENTE</option>
             <?php 	 
 						
 						$con = New Conexion();
 						
 						$sede = $_GET["sede"];
-                        $curso = $_GET["curso"];
                         $resultados = $con->query("SELECT concat(documento,'_',replace(nombre,' ','_')) as nombre FROM usuarios WHERE rol = 'docente'");
-                        /*$resultados = $con->query("SELECT  CONCAT(nombre,'_',documento) AS nombre FROM usuarios WHERE curso = '$curso'");*/
 						while ($consulta = mysqli_fetch_array($resultados)) {
 							echo "<option value=".$consulta ['nombre'].">".$consulta ['nombre']."</option>";
 							
 						}
 			?>
             </select>
-            <br>
-            <br>
-		    <input name="sede" value="<?php  echo $sede ?>" type="text" readonly> 
-        <br>
+<br>
+<br>
 		<input class="boton" type="submit" value="Continuar">
 		</form> 
 </div>
@@ -147,24 +85,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 <div class="contenedor-menu">
 		<a href="#" class="btn-menu">Menu</a>
 		<ul class="submenu">
-            <li class="activado"><a href="../obser/app_estudiante.php">Iniciar</a></li>
-            <li><a href="#">Sede</a>
-				<ul>                        
-                    <?php 
-                        $con = New Conexion();
-                        $consulta = $con->query("SELECT DISTINCT * FROM usuarios WHERE documento='".$_SESSION['documento']."'");
-                        while($row = mysqli_fetch_array($consulta)){
-
-                    ?>
-					<li>
-                        <a class="add_sede" href="?sede=<?php echo $row['sede']?>">
-                        <?php echo $row['sede']?>
-                        </a>
-                    </li>
-                    <?php }?>
-				</ul>
-			</li>
-			<li><a href="#">Docente</i></a>
+			<li class="activado"><a href="#">Docente</i></a>
 				<ul>
                     <li><a href="javascript:Alumno()" id="alumno">Nombre</a></li>
 				</ul>
@@ -174,8 +95,8 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 </div>
 </section>
 
-
-
+<br>
+<br>
 
     </div>
     <div class="row">            
@@ -188,7 +109,15 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
                 <br>
             <div class="fakeobser" style="height:300px;">
                 <form action="php/mensajeest.php" method="post"> 
-                <input type="text" placeholder="Nombre del Docente..." name="docente" value="<?php echo $_GET["alumno"]; ?>">
+                <input type="text" placeholder="Nombre del Docente..." name="docente" readonly value="<?php if (!isset($_GET["alumno"])){
+
+                    }else{
+                        echo $_GET["alumno"];
+                    }if(!isset($_GET["nombre"])){
+                        
+                    }else{
+                        echo $_GET["nombre"];
+                    } ?>">
         <br>
         <br>
         <br>
@@ -202,7 +131,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
             </textarea>
             <br>
             <br>
-            <input type="submit" value="Envia" name="respuesta">
+            <input type="submit" value="Enviar" name="respuesta">
         </form>
             </div>
         </div>

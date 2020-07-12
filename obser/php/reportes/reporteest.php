@@ -47,6 +47,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 <div id="main-container">
     <table>
         <thead>
+            <th>Id observacion</th>
             <th>Quien hizo la observacion</th>
             <th>Tipo</th>
             <th>Fecha</th>
@@ -56,13 +57,15 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 include("../../php/conexion.php");
 $con = New Conexion();
 
-$consulta = $con->query("SELECT * FROM observaciones WHERE para = '".$_SESSION['documento']."' and curso = 'curso'");
+$consulta = $con->query("SELECT O.id_mensaje,O.de,U.nombre,U.curso,O.observacion,O.fecha,O.tipo 
+FROM observaciones O,usuarios U WHERE O.para=U.documento AND O.para = '$doc'");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>
 
     <tbody>
         <tr>
+            <td><?php echo "<a href=../../app_estudiante.php?id=".$row['id_mensaje']."&".'nombre='. $row['de'].">".$row['id_mensaje']?></td>
             <td><?php echo $row['de']?></td>
             <td><?php echo $row['tipo']?></td>
             <td><?php echo $row['fecha']?></td>
@@ -83,7 +86,7 @@ while($row = mysqli_fetch_array($consulta)){
             <th>Fecha</th>
         </thead>
 <?php
-//include("../../php/conexion.php");
+
 $con = New Conexion();
 
 $consulta = $con->query("SELECT * FROM respuesta WHERE de = '".$_SESSION['documento']."'");

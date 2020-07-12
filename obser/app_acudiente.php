@@ -183,7 +183,11 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
                 <h2>Observacion</h2>
             <div class="fakeobser" style="height:300px;">
                 <form action="php/mensajesacu.php" method="post"> 
-                    <input type="text" placeholder="Nombre del Docente..." name="docente" value="<?php echo $_GET["alumno"]; ?>">
+                    <input type="text" placeholder="Nombre del Docente..." name="docente" value="<?php if (!isset($_GET["alumno"])){
+
+                    }else{
+                        echo $_GET["alumno"];
+                    }?>">
                     <br><br>
                     <h2>Compromiso Familiar</h2>
         <br>
