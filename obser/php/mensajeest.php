@@ -24,16 +24,9 @@ if (isset($_POST['respuesta']))
     $version = $_POST['version'];
     $compromiso = $_POST['compromiso'];
 
-        if ($para == " " && $version == " " && $compromiso == " ") 
-        {
-            echo "<script type='text/javascript'>
-            alert('Todos los campos son obligatorios');
-            window.location.href=' ../../obser/app_estudiante.php ';
-            </script>";
-        }
-        else
-        {
-            $consulta = $con->query("SELECT * FROM usuarios WHERE documento = substr('$para',1,instr('$para','_')-1)");
+    
+
+            $consulta = $con->query("SELECT * FROM usuarios WHERE documento = $para");
             $row =mysqli_fetch_array($consulta);
             $contar =mysqli_num_rows($consulta);
 
@@ -58,7 +51,7 @@ if (isset($_POST['respuesta']))
                     </script>";
                 }
             }
-        }
+        
 }else{
         echo "<script type='text/javascript'>
             alert('El usuario al que intenta enviar el compromiso no existe');

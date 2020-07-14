@@ -57,16 +57,16 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 include("../../php/conexion.php");
 $con = New Conexion();
 
-$consulta = $con->query("SELECT O.id_mensaje,O.de,U.nombre,U.curso,O.observacion,O.fecha,O.tipo 
-FROM observaciones O,usuarios U WHERE O.para=U.documento AND O.para = '$doc'");
+$consulta = $con->query("SELECT O.id_mensaje,O.de,REPLACE(D.nombre, ' ', '_') profe,U.nombre,U.curso,O.observacion,O.fecha,O.tipo FROM observaciones O,usuarios U, usuarios D 
+WHERE O.para=U.documento AND O.de = D.documento AND O.para = '$doc'");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>
 
     <tbody>
         <tr>
-            <td><?php echo "<a href=../../app_estudiante.php?id=".$row['id_mensaje']."&".'nombre='. $row['de'].">".$row['id_mensaje']?></td>
-            <td><?php echo $row['de']?></td>
+            <td><?php echo "<a href=../../app_estudiante.php?id=".$row['id_mensaje']."&".'documento='. $row['de']."&".'nombre='. $row['profe'].">".$row['id_mensaje']?></td>
+            <td><?php echo $row['profe']?></td>
             <td><?php echo $row['tipo']?></td>
             <td><?php echo $row['fecha']?></td>
             <td><?php echo $row['observacion']?></td>

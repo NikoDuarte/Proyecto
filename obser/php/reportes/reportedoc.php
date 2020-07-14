@@ -91,14 +91,15 @@ while($row = mysqli_fetch_array($consulta)){
 
 $con = New Conexion();
 
-$consulta = $con->query("SELECT * FROM respuesta WHERE para = '".$_SESSION['documento']."'");
+$consulta = $con->query("SELECT O.id_mensaje,O.de,REPLACE(D.nombre, ' ', ' ') profe,U.nombre,U.curso,O.fecha,O.version,O.compromiso FROM respuesta O,usuarios U, usuarios D 
+WHERE O.para=U.documento AND O.de = D.documento AND O.para = '$doc'");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>
 
     <tbody>
         <tr>
-            <td><?php echo $row['de']?></td>
+            <td><?php echo $row['profe']?></td>
             <td><?php echo $row['version']?></td>
             <td><?php echo $row['compromiso']?></td>
             <td><?php echo $row['fecha']?></td>
