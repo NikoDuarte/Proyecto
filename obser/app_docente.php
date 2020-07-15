@@ -113,7 +113,11 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
         </nav>
     </div>
 </main>
-<section class="img">
+
+<table class="nav">
+    <tr>
+        <td>
+        <section class="img">
 <div align="center">
 <div class="contenedor-menu">
 		<a href="#" class="btn-menu">Menu</a>
@@ -149,45 +153,109 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 </div>
 </section>
 
+        </td>
+    </tr>
+</table>
 
-    <!--Observaciones-->
-    <div class="row">            
-        <div class="side">
+<!--pruebas row-->
+<div class="row">            
+    <div class="side">
         <br>
-            <div class=side2>
-                <h2>Observacion</h2>
-                <h3> Ingrese la Observacion </h3>
-            <div class="fakeobser" style="height:300px;">
-                <form action="php/mensajedoc.php" method="post"> 
-                    <input type="text" placeholder="Nombre del Estudiante..." name="estudiante" readonly value="<?php if (!isset($_GET["alumno"])){
-
-                    }else{
-                        echo $_GET["alumno"];
-                    }?>">
-                    <br>
-                    <input type="text" placeholder="Curso...." name="curso" readonly value="<?php if (!isset($_GET["curso"])){
-
-                    }else{
-                        echo $_GET["curso"];
-                    }?>">
-                <select name="tipo" class="tipoobser">
-                    <option>SELECCIONA UN TIPO</option>
-                    <option value="disciplina">Disciplinaria</option>
-                    <option value="academica">Academica</option>
-                </select>
-        <br>
-        <br>
-        <br>
-            <textarea class="form-control" type="textarea" name="obser" id="form" maxlength="650" rows="10">
-            </textarea>
-        <br>
-        <br>
-            <input type="submit" value="Enviar Observacion" name="observacion">
-        </form>
+        <div class=sideTitle>
+            <h2 align="center">Realiza la observacion a </h2>
+        </div>
+        <br><br>
+        <div class=side2>
+            <div class="fakecolor" >
+                <table class="form">
+                    <tr>
+                        <td>
+                        <div class="fakeobser" >
+                            <form action="php/mensajeest.php" method="post"> 
+                            <div align="center">
+                                Nombre estudiante:
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="fakeobser" >
+                            <div align="center">
+                                Curso:
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="fakeobser" >
+                            <div align="center">
+                                Tipo:
+                            </div>
+                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <div class="fakeobser">
+                            <div align="center">
+                                <input type="text" class="alumno"  name="alumno" readonly value="<?php 
+                                    if(!isset($_GET["alumno"])){
+                                    }else{
+                                    echo $_GET["alumno"];
+                                    } 
+                                ?>">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="fakeobser">
+                            <div align="center">
+                                <input type="text" class="curso" name="curso" readonly value="<?php 
+                                    if(!isset($_GET["curso"])){
+                                    }else{
+                                    echo $_GET["curso"];
+                                    } 
+                                ?>">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="fakeobser">
+                            <div align="center">
+                                <select name="tipo" class="tipo">
+                                    <option>SELECCIONA UN TIPO</option>
+                                    <option value="disciplina">Disciplinaria</option>
+                                    <option value="academica">Academica</option>
+                                </select>
+                            </div>
+                        </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
+
+<br>
+<br>
+<br>
+<div class="side5" align="center">
+    <div class="fakeobser">
+        <h2 align="center">Ingrese la onservacion</h2>
     </div>
 </div>
+<br>
+<div class="fakeobser">
+    <textarea class="form-control" type="textarea" name="version" id="form" maxlength="650" rows="10" >
+    </textarea>
+</div>
+<br>
+<div class="fakeobser">
+    <input type="submit" value="Enviar" name="respuesta">
+</div>
+</form>
+    </div>
+</div>
+
+
+
 <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="assets/js/main.js"></script>
 

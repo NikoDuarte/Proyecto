@@ -6,28 +6,6 @@
 }
 
 
-/*Ventana emergente*/
-.ventana_grado{
-	background: rgba(51, 51, 51, 0.596);
-	width: 30%;
-	color: white;
-	font-size: 20px;
-	text-align: center;
-	padding: 15px;
-	min-height: 70px;
-	position: absolute;
-	left: 65%;
-	top: 15%;
-	display: none;
-	border-radius: 15px;
-}
-
-#cerrar {
-	position: absolute;
-	right: 3px;
-	top: 3px;
-}
-
 
 /*POPUP_CURSO*/
 .ventana_curso{
@@ -39,7 +17,7 @@
 	padding: 15px;
 	min-height: 70px;
 	position: absolute;
-	left: 65%;
+	left: 50%;
 	top: 15%;
 	display: none;
 	border-radius: 27px;
@@ -101,7 +79,7 @@
 	padding: 15px;
 	min-height: 70px;
 	position: absolute;
-	left: 65%;
+	left: 50%;
 	top: 15%;
 	display: none;
 	border-radius: 27px;
@@ -225,7 +203,9 @@ header{
     color: #ffffff;
 }
 
-/*imagen background*/
+.nav{
+	width: 65%;
+}
 
 
 /*submenu*/
@@ -316,19 +296,6 @@ header{
 
 
 
-a.boton {
-	align-items: right;
-	border: 10px solid #494949; /*anchura, estilo y color borde*/
-	padding: 20spx; /*espacio alrededor texto*/
-	background-color: #494949; /*color botón*/
-	color: #ffffff; /*color texto*/
-	text-decoration: none; /*decoración texto*/
-	text-transform: uppercase; /*capitalización texto*/
-	font-family: 'Prompt', sans-serif; /*tipografía texto*/
-    border-radius: 50px; /*bordes redondos*/
-
-}
-
 .row{
     display: -ms-flexbox;
     display: flex;
@@ -340,23 +307,44 @@ a.boton {
     -ms-flex: 30%;
     flex: 30%;
     /*background-color: #747474;*/
-    padding: 15px;
+    padding: 20px;
 }
+
+.form{
+	width: 100%;
+}
+
+.sideTitle{
+	width: 100%;
+	border-radius: 15px;
+    -ms-flex: 15%;
+    flex: 15%;
+    background-color: rgba(0, 140, 255, 0.493);
+    padding: 12px;
+}
+
 
 
 /*SIDE2*/
 
 .side2{
+	width: 100%;
+	border-radius: 15px;
     -ms-flex: 15%;
     flex: 15%;
     background-color: rgba(0, 140, 255, 0.493);
-    padding: 120px;
+    padding: 14px;
 }
 
-.fakeobser [type="text"]{
-	width: 20%;
+.fakeobser .alumno{
+	text-align: center;
+	width: 100%;
 	height: 40px;
-	border: 1px solid gray;
+	background-color: rgba(255, 255, 240, 0.171);
+	color: white;
+	font-size: 15px;
+	outline: none;
+    border: 0;
 	margin-bottom: 3px;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -364,27 +352,54 @@ a.boton {
 	-webkit-border-radius: 5px;
 }
 
-.fakeobser select{
-	width: 20%;
+
+
+.fakeobser .curso{
+	text-align: center;
+	width: 30%;
 	height: 40px;
-	border: 1px solid gray;
+	background-color: rgba(255, 255, 240, 0.171);
+	color: white;
+	font-size: 20px;
+	outline: none;
+    border: 0;
 	margin-bottom: 3px;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-o-border-radius: 5px;
 	-webkit-border-radius: 5px;
-
 }
 
-.fakeobser select:hover{
-	background-color: #adadad;
-    color: black;
+.fakeobser .tipo{
+	text-align: center;
+	width: 45%;
+	height: 40px;
+	background-color: rgba(255, 255, 240, 0.63);
+	font-size: 15px;
+	outline: none;
+    border: 0;
+	margin-bottom: 3px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.side5{
+	width: 35%;
+    -ms-flex: 15%;
+    flex: 15%;
+    background-color: rgba(0, 140, 255, 0.493);
+    padding: 20px;
+	padding-bottom: 1rem;
+	border-radius: 15px;
+
 }
 
 
 .fakeobser textarea{
-	width: 80%;
-	height: 215px;
+	width: 55%;
+	height: 250px;
 	border: 1px solid gray;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -405,9 +420,6 @@ a.boton {
 }
 
 .fakeobser input[type="submit"]:hover {
-    background-color: rgba(32, 32, 32, 0.534);
+    background-color: rgba(0, 0, 0, 0.637);
     color: white;
 }
-
-
-
