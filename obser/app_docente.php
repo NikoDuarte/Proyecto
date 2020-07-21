@@ -171,7 +171,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
                     <tr>
                         <td>
                         <div class="fakeobser" >
-                            <form action="php/mensajeest.php" method="post"> 
+                            <form action="php/mensajedoc.php" method="post"> 
                             <div align="center">
                                 Nombre estudiante:
                             </div>
@@ -238,17 +238,17 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 <br>
 <div class="side5" align="center">
     <div class="fakeobser">
-        <h2 align="center">Ingrese la onservacion</h2>
+        <h2 align="center">Ingrese la observacion</h2>
     </div>
 </div>
 <br>
 <div class="fakeobser">
-    <textarea class="form-control" type="textarea" name="version" id="form" maxlength="650" rows="10" >
+    <textarea class="form-control" type="textarea" name="obser" id="form" maxlength="650" rows="10" >
     </textarea>
 </div>
 <br>
 <div class="fakeobser">
-    <input type="submit" value="Enviar" name="respuesta">
+    <input type="submit" value="Enviar" name="observacion">
 </div>
 </form>
     </div>

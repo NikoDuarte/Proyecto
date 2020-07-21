@@ -33,7 +33,7 @@ if (isset($_POST['respuesta']))
             if ($contar != 0) 
             {
 
-                $sentencia="INSERT INTO respuesta (de,para,fecha,version,compromiso) values('".$_SESSION['documento']."','".$row['documento']."',now(),'$version','$compromiso')"; 
+                $sentencia="INSERT INTO compromiso (de,para,fecha,version,compromiso) values('".$_SESSION['documento']."','".$row['documento']."',now(),'$version','$compromiso')"; 
                 $insertar=$con->query($sentencia) or die("Error de datos".mysqli_error($con));
 
                 if ($insertar) 

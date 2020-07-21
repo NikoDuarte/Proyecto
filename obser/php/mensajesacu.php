@@ -6,7 +6,7 @@ ob_start();
 $doc = $_SESSION['documento'];
 $nom = $_SESSION['nombre'];
 if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
-    header("location:../php-login/login.php");
+    header("location:../php-login/login.html");
 }
 
 
@@ -16,38 +16,49 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 include("conexion.php");
 $con = New Conexion();
 
-if (isset($_POST['observacion'])) {
+
+
+if (isset($_POST['respuesta'])) 
+{
     $para = $_POST['docente'];
-    $observacion = $_POST['obser'];
+    $compromiso = $_POST['compromiso'];
 
-    $consulta = $con->query("SELECT * FROM usuarios WHERE documento = substr('$para',1,instr('$para','_')-1)");
-    $row =mysqli_fetch_array($consulta);
-    $contar =mysqli_num_rows($consulta);
+    
 
-    if ($contar != 0) {
+            $consulta = $con->query("SELECT * FROM usuarios WHERE documento = $para");
+            $row =mysqli_fetch_array($consulta);
+            $contar =mysqli_num_rows($consulta);
 
-        $sentencia="INSERT INTO respuesta (de,para,fecha,compromiso) values('".$_SESSION['nombre']."','".$row['documento']."',now(),'$observacion')"; 
-         $insertar=$con->query($sentencia) or die("Error de datos".mysqli_error($con));
+            if ($contar != 0) 
+            {
 
-        if ($insertar) {
-            echo "<script type='text/javascript'>
-            alert('Se envio el compromiso correctamente');
-            window.location.href=' ../../obser/app_acudiente.php ';
-            </script>";
-        }else{
-            echo "<script type='text/javascript'>
-            alert('No se puede enviar el compromiso');
-            window.location.href=' ../../obser/app_acudiente.php ';
-            </script>";
-        }
-    }else{
+                $sentencia="INSERT INTO compromiso_familiar (de,para,fecha,compromiso) values('".$_SESSION['documento']."','".$row['documento']."',now(),'$compromiso')"; 
+                $insertar=$con->query($sentencia) or die("Error de datos".mysqli_error($con));
+
+                if ($insertar) 
+                {
+                    echo "<script type='text/javascript'>
+                    alert('Se envio el compromiso correctamente');
+                    window.location.href=' ../../obser/app_acudiente.php ';
+                    </script>";
+                }
+                else
+                {
+                    echo "<script type='text/javascript'>
+                    alert('No se puede enviar el compromiso');
+                    window.location.href=' ../../obser/app_acudiente.php ';
+                    </script>";
+                }
+            }
+        
+}else{
         echo "<script type='text/javascript'>
             alert('El usuario al que intenta enviar el compromiso no existe');
             window.location.href=' ../../obser/app_acudiente.php ';
             </script>";
     }
 
-}
+
 
 
 ?>

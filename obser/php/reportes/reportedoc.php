@@ -91,7 +91,7 @@ while($row = mysqli_fetch_array($consulta)){
 
 $con = New Conexion();
 
-$consulta = $con->query("SELECT O.id_mensaje,O.de,REPLACE(D.nombre, ' ', ' ') profe,U.nombre,U.curso,O.fecha,O.version,O.compromiso FROM respuesta O,usuarios U, usuarios D 
+$consulta = $con->query("SELECT O.id_com,O.de,REPLACE(D.nombre, ' ', ' ') profe,U.nombre,U.curso,O.fecha,O.version,O.compromiso FROM compromiso O,usuarios U, usuarios D 
 WHERE O.para=U.documento AND O.de = D.documento AND O.para = '$doc'");
 while($row = mysqli_fetch_array($consulta)){
 

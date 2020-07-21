@@ -58,7 +58,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
       $con = New Conexion();
       if (isset($_POST['consultar'])){
       $doc = $_SESSION['documento'];
-      $resultados = $con->query("SELECT * FROM acudiente WHERE documento = '$doc'");
+      $resultados = $con->query("SELECT * FROM usuarios WHERE documento = '$doc'");
       while ($consulta = mysqli_fetch_array($resultados)) {
       
       ?>
@@ -68,36 +68,9 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
       <h2 class="titulo1">Tu institucion es:</h2>
       <input type="text" name="institucion" id="institucion" value="<?php echo $consulta ['institucion'];?>" disabled>
       <h2 class="titulo2">Tu documento es:</h2>
-      <input type="text" name="documento" id="documento" value="<?php echo $consulta ['documento'];?>" disabled>
-      <h2 class="titulo2">Tu contraseña es:</h2>
-      <input type="text" name="password" id="password" value="<?php echo $consulta ['contraseña'];}}?>">
-      <input type="submit" class="modificar" name="actualizar" id="boton" value="actualizar datos">
+      <input type="text" name="documento" id="password" value="<?php echo $consulta ['documento'];?>" disabled> <?php }} ?>
     </form>
   </div>
-  <?php
-  
-if (isset($_POST['actualizar']))
-{
-
-  $contra = $_POST['password'];
-
-
-    $sql = $con->query("UPDATE acudiente SET  contraseña='$contra' WHERE nombre='$nom'");
-  if ($sql) {
-    echo "<script type='text/javascript'>
-    alert('Se han cambiado sus datos exitosamente');
-    window.location.href='mi_perfil_acu.php?correo=$_SESSION[documento]';
-    </script>";
-  }else{
-  echo "<script type='text/javascript'>
-  alert('No se han podido cambiar sus datos');
-  window.location.href='mi_perfil_est.php?correo=$_SESSION[documento]';
-  </script>";
-}
-}
-
-?>
-
 </div>
 
 </body>

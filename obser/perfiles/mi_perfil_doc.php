@@ -53,8 +53,8 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
     <h1>Empieza A Modificar Tu Perfil</h1>
     <br><br>
     <form action="" method="post">
-      <input type="submit" class="consultar" name="consultar" id="boton" value="consulta mis datos">
-      <?php 
+
+          <?php 
       include("../php/conexion.php");  
       $con = New Conexion();
       if (isset($_POST['consultar'])){
@@ -73,10 +73,10 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
       <input type="text" name="sede" id="sede" value="<?php echo $consulta ['sede'];?>">
       <br>
       <h2 class="titulo2">Tu documento es:</h2>
-      <input type="text" name="documento" id="documento" value="<?php echo $consulta ['documento'];?>" disabled>
-      <h2 class="titulo2">Tu contraseña es:</h2>
-      <input type="text" name="password" id="documento" value="<?php echo $consulta ['password'];}}?>">
+      <input type="text" name="documento" id="documento" disabled value="<?php echo $consulta ['documento'];?>"><?php }} ?>
       <br>
+
+      <input type="submit" class="consultar" name="consultar" id="boton" value="consulta mis datos">
       <input type="submit" class="modificar" name="actualizar" id="boton" value="actualizar datos">
     </form>
   </div>
@@ -85,10 +85,9 @@ if (isset($_POST['actualizar']))
 {
 
   $sede = $_POST['sede'];
-  $password = $_POST['password'];
 
 
-    $sql = $con->query("UPDATE usuarios SET sede = '$sede', password = '$password' WHERE documento = '$doc'");
+    $sql = $con->query("UPDATE usuarios SET sede = '$sede' WHERE documento = '$doc'");
   if ($sql) {
     echo "<script type='text/javascript'>
     alert('Se han cambiado sus datos exitosamente');

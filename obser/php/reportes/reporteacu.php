@@ -55,8 +55,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 include("../../php/conexion.php");
 $con = New Conexion();
 
-$consulta = $con->query("SELECT U.* FROM usuarios U, RELACION_ACU_EST r 
-WHERE u.documento=r.documento_estudiante AND r.documento_acudiente='".$_SESSION['documento']."'");
+$consulta = $con->query("SELECT U.* FROM usuarios U, usuarios r WHERE u.documento=r.documento AND r.docu_acu='$doc'");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>
@@ -77,6 +76,7 @@ while($row = mysqli_fetch_array($consulta)){
 <div id="main-container">
     <table>
         <thead>
+            <th>Id Observacion</th>
             <th>Quien hizo la observacion</th>
             <th>Para</th>
             <th>Tipo</th>
@@ -84,19 +84,25 @@ while($row = mysqli_fetch_array($consulta)){
             <th>Observacion</th>
         </thead>
 <?php
-//include("../../php/conexion.php");
 $con = New Conexion();
 
-$consulta = $con->query("SELECT U.* FROM observaciones U, RELACION_ACU_EST r 
-WHERE u.para=r.documento_estudiante AND r.documento_acudiente='".$_SESSION['documento']."'");
+$consulta = $con->query(
+    "SELECT O.id_obser,O.de,REPLACE(D.nombre, ' ', '_') profe,U.nombre,U.curso,O.observacion,O.fecha,O.tipo 
+    FROM observaciones O 
+    INNER JOIN usuarios U ON O.para=U.documento 
+    INNER JOIN usuarios D ON O.de=D.documento 
+    INNER JOIN usuarios r ON U.documento=r.documento 
+    INNER JOIN usuarios A ON A.documento=r.docu_acu 
+    WHERE r.docu_acu='$doc'");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>
 
     <tbody>
         <tr>
-            <td><?php echo $row['de']?></td>
-            <td><?php echo $row['para']?></td>
+            <td><?php echo "<a href=../../app_acudiente.php?id=".$row['id_obser']."&".'documento='. $row['de']."&".'nombre='. $row['profe'].">".$row['id_obser']?></td>
+            <td><?php echo $row['profe']?></td>
+            <td><?php echo $row['nombre']?></td>
             <td><?php echo $row['tipo']?></td>
             <td><?php echo $row['fecha']?></td>
             <td><?php echo $row['observacion']?></td>
@@ -109,7 +115,7 @@ while($row = mysqli_fetch_array($consulta)){
 <div id="main-container">
     <table>
         <thead>
-            <th>Respondio la observacion</th>
+            <th>Respondio la observacion de</th>
             <th>Compromiso</th>
             <th>Fecha</th>
         </thead>
@@ -117,14 +123,16 @@ while($row = mysqli_fetch_array($consulta)){
 //include("../../php/conexion.php");
 $con = New Conexion();
 
-$consulta = $con->query("SELECT * FROM respuesta WHERE de = '".$_SESSION['nombre']."'");
+$consulta = $con->query("SELECT O.id_comfa,O.de,REPLACE(D.nombre, ' ', '_') profe,
+U.nombre,O.compromiso,O.fecha FROM compromiso_familiar O,usuarios U, usuarios D 
+WHERE O.para=U.documento AND O.para = D.documento AND O.de = '$doc'");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>
 
     <tbody>
         <tr>
-            <td><?php echo $row['de']?></td>
+            <td><?php echo $row['profe']?></td>
             <td><?php echo $row['compromiso']?></td>
             <td><?php echo $row['fecha']?></td>
         </tr>

@@ -53,7 +53,6 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
     <h1>Empieza A Modificar Tu Perfil</h1>
     <br><br>
     <form action="" method="post">
-      <input type="submit" class="consultar" name="consultar" id="boton" value="consulta mis datos">
       <?php 
       include("../php/conexion.php");  
       $con = New Conexion();
@@ -75,35 +74,12 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
       <input type="text" name="jornada" id="jornada" value="<?php echo $consulta ['curso'];?>" disabled>
       <br>
       <h2 class="titulo2">Tu documento es:</h2>
-      <input type="text" name="documento" id="documento" value="<?php echo $consulta ['documento'];?>" disabled>
-      <h2 class="titulo2">Tu contraseña es:</h2>
-      <input type="text" name="password" id="documento" value="<?php echo $consulta ['password'];}}?>">
+      <input type="text" name="documento" id="documento" value="<?php echo $consulta ['documento'];?>" disabled> <?php }} ?>
       <br>
-      <input type="submit" class="modificar" name="actualizar" id="boton" value="actualizar datos">
+
+      <input type="submit" class="consultar" name="consultar" id="boton" value="consulta mis datos">
     </form>
   </div>
-  <?php 
-if (isset($_POST['actualizar']))
-{
-
-  $password = $_POST['password'];
-
-
-    $sql = $con->query("UPDATE usuarios SET password = '$password' WHERE documento = '$doc'");
-  if ($sql) {
-    echo "<script type='text/javascript'>
-    alert('Se han cambiado sus datos exitosamente');
-    window.location.href='mi_perfil_est.php?correo=$_SESSION[documento]';
-    </script>";
-  }else{
-  echo "<script type='text/javascript'>
-  alert('No se han podido cambiar sus datos');
-  window.location.href='mi_perfil_est.php?correo=$_SESSION[documento]';
-  </script>";
-}
-}
-?>
-
 </div>
 
 </body>

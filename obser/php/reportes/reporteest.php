@@ -57,7 +57,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 include("../../php/conexion.php");
 $con = New Conexion();
 
-$consulta = $con->query("SELECT O.id_mensaje,O.de,REPLACE(D.nombre, ' ', '_') profe,U.nombre,U.curso,O.observacion,O.fecha,O.tipo FROM observaciones O,usuarios U, usuarios D 
+$consulta = $con->query("SELECT O.id_obser,O.de,REPLACE(D.nombre, ' ', '_') profe,U.nombre,U.curso,O.observacion,O.fecha,O.tipo FROM observaciones O,usuarios U, usuarios D 
 WHERE O.para=U.documento AND O.de = D.documento AND O.para = '$doc'");
 while($row = mysqli_fetch_array($consulta)){
 
@@ -65,7 +65,7 @@ while($row = mysqli_fetch_array($consulta)){
 
     <tbody>
         <tr>
-            <td><?php echo "<a href=../../app_estudiante.php?id=".$row['id_mensaje']."&".'documento='. $row['de']."&".'nombre='. $row['profe'].">".$row['id_mensaje']?></td>
+            <td><?php echo "<a href=../../app_estudiante.php?id=".$row['id_obser']."&".'documento='. $row['de']."&".'nombre='. $row['profe'].">".$row['id_obser']?></td>
             <td><?php echo $row['profe']?></td>
             <td><?php echo $row['tipo']?></td>
             <td><?php echo $row['fecha']?></td>
@@ -80,7 +80,7 @@ while($row = mysqli_fetch_array($consulta)){
 <div id="main-container">
     <table>
         <thead>
-            <th>Respondio la observacion</th>
+            <th>Respondio la observacion de</th>
             <th>version</th>
             <th>Compromiso</th>
             <th>Fecha</th>
@@ -89,14 +89,16 @@ while($row = mysqli_fetch_array($consulta)){
 
 $con = New Conexion();
 
-$consulta = $con->query("SELECT * FROM respuesta WHERE de = '".$_SESSION['documento']."'");
+
+$consulta = $con->query("SELECT O.id_com,O.de,REPLACE(D.nombre, ' ', '_') profe,U.nombre,O.version,O.compromiso,O.fecha FROM compromiso O,usuarios U, usuarios D 
+WHERE O.para=U.documento AND O.para = D.documento AND O.de = '$doc'");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>
 
     <tbody>
         <tr>
-            <td><?php echo $row['de']?></td>
+            <td><?php echo $row['profe']?></td>
             <td><?php echo $row['version']?></td>
             <td><?php echo $row['compromiso']?></td>
             <td><?php echo $row['fecha']?></td>

@@ -220,4 +220,21 @@ a:hover{
 	.login-content{
 		justify-content: center;
 	}
+    .btn_vuelve{
+		display: block;
+		width: 100%;
+		height: 50px;
+		border-radius: 25px;
+		outline: none;
+		border: none;
+		background-image: linear-gradient(to right, #ffa551, #d66800, #ffa551);
+		background-size: 200%;
+		font-size: 1.2rem;
+		color: #fff;
+		font-family: 'Poppins', sans-serif;
+		text-transform: uppercase;
+		margin: 1rem 0;
+		cursor: pointer;
+		transition: .5s;
+	}
 }
