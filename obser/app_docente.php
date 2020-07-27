@@ -47,10 +47,12 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 		<form  method="get">
                 <select class="curso" name="curso">
                     <option> SELECCIONE EL CURSO</option>
-            <?php   
+                    <?php   
 			
-			$con = New Conexion();
-			$sede = $_GET["sede"];
+            $con = New Conexion();
+            $consulta = $con->query("SELECT * FROM usuarios WHERE documento = '$doc'") ;
+            $fila = $consulta->fetch_object();
+			$sede = $fila->sede;
 			$resultados = $con->query("SELECT DISTINCT curso FROM usuarios WHERE sede = '$sede'");
 			while ($consulta = mysqli_fetch_array($resultados)) {
 			echo "<option value=".$consulta ['curso'].">".$consulta ['curso']."</option>";
@@ -122,22 +124,6 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 <div class="contenedor-menu">
 		<a href="#" class="btn-menu">Menu</a>
 		<ul class="submenu">
-            <li class="activado"><a href="#">Sede</a>
-				<ul>
-                <?php 
-                        $con = New Conexion();
-                        $consulta = $con->query("SELECT DISTINCT sede FROM usuarios WHERE documento='".$_SESSION['documento']."'");
-                        while($row = mysqli_fetch_array($consulta)){
-
-                    ?>
-					<li>
-                        <a class="add_sede" href="?sede=<?php echo $row['sede']?>">
-                        <?php echo $row['sede']?>
-                        </a>
-                    </li>
-                    <?php }?>
-				</ul>
-			</li>
 			<li><a href="#">Curso</a>
 				<ul>
 					<li><a href="javascript:Curso()" id="curso">Curso</a></li>
@@ -259,13 +245,6 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="assets/js/main.js"></script>
 
-<script>
-	function principal() {
-		var sede="principal";
-	return sede;
-    }
-</script>
-
     <script>
     function Curso() {
     document.getElementById("curso")
@@ -320,8 +299,8 @@ function continuar4() {
     }
 </script>
 
-<script>
-        Push.create("BIENVENIDO <?php echo $_SESSION['nombre']?>",{
+<!--<script>
+        Push.create("BIENVENIDO <?php //echo $_SESSION['nombre']?>",{
             body: "Mira tus obserbaciones",
             icon: "img/noti.png",
             timeout: 5000,
@@ -330,7 +309,7 @@ function continuar4() {
                 this.close();
             }
         });
-    </script>
+    </script>-->
 
 
 
