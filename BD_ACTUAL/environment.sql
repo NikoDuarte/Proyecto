@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-07-2020 a las 22:48:29
+-- Tiempo de generación: 30-07-2020 a las 00:45:59
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.2.29
 
@@ -33,36 +33,21 @@ CREATE TABLE `compromiso` (
   `para` int(15) NOT NULL,
   `version` varchar(3500) NOT NULL,
   `compromiso` varchar(3500) NOT NULL,
-  `fecha` date NOT NULL
+  `compromiso_familiar` varchar(3500) DEFAULT NULL,
+  `fecha_est` date NOT NULL,
+  `id_observacion` int(11) NOT NULL,
+  `fecha_acu` date DEFAULT NULL,
+  `doc_acudiente` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `compromiso`
 --
 
-INSERT INTO `compromiso` (`id_com`, `de`, `para`, `version`, `compromiso`, `fecha`) VALUES
-(1, 1007557777, 123456800, 'no me porte mal', 'no lo vuelvo hacer', '2020-07-21');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `compromiso_familiar`
---
-
-CREATE TABLE `compromiso_familiar` (
-  `id_comfa` int(11) NOT NULL,
-  `de` int(15) NOT NULL,
-  `para` int(15) NOT NULL,
-  `compromiso` varchar(3500) NOT NULL,
-  `fecha` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `compromiso_familiar`
---
-
-INSERT INTO `compromiso_familiar` (`id_comfa`, `de`, `para`, `compromiso`, `fecha`) VALUES
-(1, 52275209, 123456800, 'no lo volvera hacer', '2020-07-21');
+INSERT INTO `compromiso` (`id_com`, `de`, `para`, `version`, `compromiso`, `compromiso_familiar`, `fecha_est`, `id_observacion`, `fecha_acu`, `doc_acudiente`) VALUES
+(3, 1007557777, 123456800, 'si la entregue otra cosa es que a utt no se le dio la hpta gana de contestar cucho hpta', 'jodase y valla a culiar porque le hace falta', 'No lo volvera hacer', '2020-07-28', 2, '2020-07-28', 52275209),
+(4, 1007557777, 123456800, 'aszfgfhj', 'asfdxhnjkl', NULL, '2020-07-28', 3, NULL, NULL),
+(5, 111111115, 123456800, 'sda fgbvch n', 'tyvgsxdhjukl', NULL, '2020-07-28', 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -85,20 +70,9 @@ CREATE TABLE `observaciones` (
 --
 
 INSERT INTO `observaciones` (`id_obser`, `de`, `para`, `curso`, `observacion`, `tipo`, `fecha`) VALUES
-(1, 123456800, 1007557777, 1103, 'se porto mal en clase', 'disciplina', '2020-07-21');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `respuesta`
---
-
-CREATE TABLE `respuesta` (
-  `id_respuesta` int(11) NOT NULL,
-  `id_obser` int(11) NOT NULL,
-  `id_com` int(11) NOT NULL,
-  `id_comfa` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(2, 123456800, 1007557777, 1103, 'no entrego la tarea a tiempo', 'academica', '2020-07-28'),
+(3, 123456800, 1007557777, 1103, 'jodio en clase', 'disciplina', '2020-07-28'),
+(4, 123456800, 111111115, 1103, '    asdfghjyukio', 'disciplina', '2020-07-28');
 
 -- --------------------------------------------------------
 
@@ -466,28 +440,17 @@ INSERT INTO `usuarios` (`nombre`, `institucion`, `sede`, `documento`, `docu_acu`
 -- Indices de la tabla `compromiso`
 --
 ALTER TABLE `compromiso`
-  ADD PRIMARY KEY (`id_com`);
-
---
--- Indices de la tabla `compromiso_familiar`
---
-ALTER TABLE `compromiso_familiar`
-  ADD PRIMARY KEY (`id_comfa`);
+  ADD PRIMARY KEY (`id_com`),
+  ADD KEY `fk_com_usuario` (`doc_acudiente`),
+  ADD KEY `fk_comp_obser` (`id_observacion`);
 
 --
 -- Indices de la tabla `observaciones`
 --
 ALTER TABLE `observaciones`
-  ADD PRIMARY KEY (`id_obser`);
-
---
--- Indices de la tabla `respuesta`
---
-ALTER TABLE `respuesta`
-  ADD PRIMARY KEY (`id_respuesta`),
-  ADD UNIQUE KEY `id_obser` (`id_obser`,`id_com`),
-  ADD UNIQUE KEY `id_comfa` (`id_comfa`),
-  ADD KEY `id_com` (`id_com`);
+  ADD PRIMARY KEY (`id_obser`),
+  ADD KEY `fk_obs_usuario_de` (`de`),
+  ADD KEY `fk_obs_usuario_para` (`para`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -504,37 +467,31 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `compromiso`
 --
 ALTER TABLE `compromiso`
-  MODIFY `id_com` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `compromiso_familiar`
---
-ALTER TABLE `compromiso_familiar`
-  MODIFY `id_comfa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_com` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `observaciones`
 --
 ALTER TABLE `observaciones`
-  MODIFY `id_obser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `respuesta`
---
-ALTER TABLE `respuesta`
-  MODIFY `id_respuesta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_obser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `respuesta`
+-- Filtros para la tabla `compromiso`
 --
-ALTER TABLE `respuesta`
-  ADD CONSTRAINT `respuesta_ibfk_1` FOREIGN KEY (`id_obser`) REFERENCES `observaciones` (`id_obser`),
-  ADD CONSTRAINT `respuesta_ibfk_2` FOREIGN KEY (`id_com`) REFERENCES `compromiso` (`id_com`),
-  ADD CONSTRAINT `respuesta_ibfk_3` FOREIGN KEY (`id_comfa`) REFERENCES `compromiso_familiar` (`id_comfa`);
+ALTER TABLE `compromiso`
+  ADD CONSTRAINT `fk_com_usuario` FOREIGN KEY (`doc_acudiente`) REFERENCES `usuarios` (`documento`),
+  ADD CONSTRAINT `fk_comp_obser` FOREIGN KEY (`id_observacion`) REFERENCES `observaciones` (`id_obser`);
+
+--
+-- Filtros para la tabla `observaciones`
+--
+ALTER TABLE `observaciones`
+  ADD CONSTRAINT `fk_obs_usuario_de` FOREIGN KEY (`de`) REFERENCES `usuarios` (`documento`),
+  ADD CONSTRAINT `fk_obs_usuario_para` FOREIGN KEY (`para`) REFERENCES `usuarios` (`documento`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
