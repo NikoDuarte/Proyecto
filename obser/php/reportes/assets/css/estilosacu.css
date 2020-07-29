@@ -78,7 +78,7 @@ header{
     font-size: 26px;
     text-align: right;
     text-decoration: none;
-    color: white;
+    color: white; 
 }
 
 .respuesta{
@@ -90,7 +90,7 @@ header{
 
 #main-container{
 	margin: 150px auto;
-	width: 80%;
+	width: 100%;
 }
 
 table{
@@ -98,12 +98,20 @@ table{
     color: white;
 	text-align: center;
 	border-collapse: collapse;
-	width: 100%;
+    width: 100%;
+    color: #fff;
 }
 
 th, td{
-	padding: 15px;
+    width: auto;
+	padding: 20px;
 }
+
+td a{
+    text-decoration: none;
+    color: #fff;
+}
+
 
 thead{
 	background-color: rgba(255, 187, 0, 0.493);

@@ -20,6 +20,7 @@ $con = New Conexion();
 
 if (isset($_POST['respuesta'])) 
 {
+    $id = $_POST['id'];
     $para = $_POST['docente'];
     $version = $_POST['version'];
     $compromiso = $_POST['compromiso'];
@@ -33,7 +34,8 @@ if (isset($_POST['respuesta']))
             if ($contar != 0) 
             {
 
-                $sentencia="INSERT INTO compromiso (de,para,fecha,version,compromiso) values('".$_SESSION['documento']."','".$row['documento']."',now(),'$version','$compromiso')"; 
+                $sentencia="INSERT INTO compromiso (de,para,fecha_est,version,compromiso,id_observacion) 
+                            values('".$doc."','".$row['documento']."',now(),'$version','$compromiso','$id')"; 
                 $insertar=$con->query($sentencia) or die("Error de datos".mysqli_error($con));
 
                 if ($insertar) 

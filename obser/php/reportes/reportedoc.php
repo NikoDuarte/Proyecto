@@ -113,6 +113,7 @@ include("assets/php/conexion.php");
 
 <table class="tabla">
         <thead>
+            <th>Id_Observacion</th>
             <th>Hiciste la observacion a</th>
             <th>Curso</th>
             <th>Tipo</th>
@@ -129,60 +130,21 @@ if(!isset($_GET["curso"])){
     $curso = $_GET['curso'];
 
 
-$consulta = $con->query("SELECT U.nombre,U.curso,O.observacion,O.curso,O.fecha,O.tipo 
+$consulta = $con->query("SELECT U.nombre,U.curso,O.id_obser,O.observacion,O.curso,O.fecha,O.tipo 
 FROM observaciones O,usuarios U WHERE O.para=U.documento AND O.de = '$doc' AND O.curso = $curso");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>
     <tbody>
         <tr>
+            <td>
+                <?php echo "<a href=mvc_reportes/mvc_doc.php?id=".$row['id_obser'].">".$row['id_obser']?>
+            </td>
             <td><?php echo $row['nombre']?></td>
             <td><?php echo $row['curso']?></td>
             <td><?php echo $row['tipo']?></td>
             <td><?php echo $row['fecha']?></td>
             <td><?php echo $row['observacion']?></td>
-        </tr>
-    </tbody>
-<?php }}?>
-</table>
-
-<br><br>
-<h2 align="center" class="respuesta">Respuesta</h2>
-<br><br>
-
-
-<table class="tabla">
-        <thead>
-            <th>Respondio la observacion</th>
-            <th>Curso</th>
-            <th>fecha</th>
-            <th>Version</th>
-            <th>Compromiso</th>
-        </thead>
-<?php
-$con = New Conexion();
-
-if(!isset($_GET["curso"])){
-
-}else{
-
-    $curso = $_GET['curso'];
-
-
-$consulta = $con->query(
-    "SELECT U.nombre,U.curso,O.version,O.compromiso,O.fecha 
-    FROM compromiso O,usuarios U 
-    WHERE O.de=U.documento AND O.para = '$doc' AND U.curso = '$curso'");
-while($row = mysqli_fetch_array($consulta)){
-
-?>
-    <tbody>
-        <tr>
-            <td><?php echo $row['nombre']?></td>
-            <td><?php echo $row['curso']?></td>
-            <td><?php echo $row['fecha']?></td>
-            <td><?php echo $row['version']?></td>
-            <td><?php echo $row['compromiso']?></td>
         </tr>
     </tbody>
 <?php }}?>

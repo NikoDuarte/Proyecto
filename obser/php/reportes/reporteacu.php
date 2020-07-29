@@ -87,13 +87,13 @@ while($row = mysqli_fetch_array($consulta)){
 $con = New Conexion();
 
 $consulta = $con->query(
-    "SELECT O.id_obser,O.de,REPLACE(D.nombre, ' ', '_') profe,U.nombre,U.curso,O.observacion,O.fecha,O.tipo 
+    "SELECT O.id_obser,O.de,REPLACE(U.nombre, ' ', '_') profe,U.nombre,U.curso,O.observacion,O.fecha,O.tipo 
+
     FROM observaciones O 
     INNER JOIN usuarios U ON O.para=U.documento 
-    INNER JOIN usuarios D ON O.de=D.documento 
-    INNER JOIN usuarios r ON U.documento=r.documento 
-    INNER JOIN usuarios A ON A.documento=r.docu_acu 
-    WHERE r.docu_acu='$doc'");
+    
+
+WHERE  U.docu_acu='$doc' AND o.id_obser NOT IN (SELECT c.id_observacion FROM compromiso c where c.doc_acudiente=U.docu_acu)");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>
@@ -115,6 +115,7 @@ while($row = mysqli_fetch_array($consulta)){
 <div id="main-container">
     <table>
         <thead>
+            <th>Id observacion respondida</th>
             <th>Respondio la observacion de</th>
             <th>Compromiso</th>
             <th>Fecha</th>
@@ -123,18 +124,19 @@ while($row = mysqli_fetch_array($consulta)){
 //include("../../php/conexion.php");
 $con = New Conexion();
 
-$consulta = $con->query("SELECT O.id_comfa,O.de,REPLACE(D.nombre, ' ', '_') profe,
-U.nombre,O.compromiso,O.fecha FROM compromiso_familiar O,usuarios U, usuarios D 
-WHERE O.para=U.documento AND O.para = D.documento AND O.de = '$doc'");
+$consulta = $con->query("SELECT O.id_com,O.id_observacion,O.de,REPLACE(D.nombre, ' ', '_') profe,
+U.nombre,O.compromiso_familiar,O.fecha_acu FROM compromiso O,usuarios U, usuarios D 
+WHERE O.para=U.documento AND O.para = D.documento AND O.doc_acudiente = '$doc'");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>
 
     <tbody>
         <tr>
+        <td><?php echo "<a href=mvc_reportes/mvc_acu.php?id=".$row['id_observacion'].">".$row['id_observacion']?></td>
             <td><?php echo $row['profe']?></td>
-            <td><?php echo $row['compromiso']?></td>
-            <td><?php echo $row['fecha']?></td>
+            <td><?php echo $row['compromiso_familiar']?></td>
+            <td><?php echo $row['fecha_acu']?></td>
         </tr>
     </tbody>
 <?php }?>

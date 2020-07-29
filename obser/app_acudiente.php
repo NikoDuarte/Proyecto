@@ -72,7 +72,7 @@ include_once("php/conexion.php");
                             ?>">
 
                     
-                        <br>
+                        <br>  
 
                         Documento docente
                         <br> <input type="text" class="doc" name="docente" readonly value="<?php 

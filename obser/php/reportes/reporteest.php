@@ -44,6 +44,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
             </ul>
         </nav>
     </div>
+
 <div id="main-container">
     <table>
         <thead>
@@ -57,8 +58,14 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 include("../../php/conexion.php");
 $con = New Conexion();
 
-$consulta = $con->query("SELECT O.id_obser,O.de,REPLACE(D.nombre, ' ', '_') profe,U.nombre,U.curso,O.observacion,O.fecha,O.tipo FROM observaciones O,usuarios U, usuarios D 
-WHERE O.para=U.documento AND O.de = D.documento AND O.para = '$doc'");
+$consulta = $con->query(
+"SELECT O.id_obser,O.de,REPLACE(D.nombre, ' ', '_') profe,U.nombre,U.curso,O.observacion,O.fecha,O.tipo 
+FROM observaciones O,usuarios U, usuarios D
+WHERE O.para=U.documento AND O.de = D.documento AND O.para = '$doc'
+AND o.id_obser NOT IN (SELECT c.id_observacion FROM compromiso c where c.de=o.para)");
+
+/*$consulta = $con->query("SELECT O.id_obser,O.de,REPLACE(D.nombre, ' ', '_') profe,U.nombre,U.curso,O.observacion,O.fecha,O.tipo FROM observaciones O,usuarios U, usuarios D 
+WHERE O.para=U.documento AND O.de = D.documento AND O.para = '$doc'");*/
 while($row = mysqli_fetch_array($consulta)){
 
 ?>
@@ -71,6 +78,7 @@ while($row = mysqli_fetch_array($consulta)){
             <td><?php echo $row['fecha']?></td>
             <td><?php echo $row['observacion']?></td>
         </tr>
+    </a>    
     </tbody>
 <?php }?>
 </table>
@@ -80,6 +88,7 @@ while($row = mysqli_fetch_array($consulta)){
 <div id="main-container">
     <table>
         <thead>
+        <th>Id Observacion</th>
             <th>Respondio la observacion de</th>
             <th>version</th>
             <th>Compromiso</th>
@@ -90,7 +99,9 @@ while($row = mysqli_fetch_array($consulta)){
 $con = New Conexion();
 
 
-$consulta = $con->query("SELECT O.id_com,O.de,REPLACE(D.nombre, ' ', '_') profe,U.nombre,O.version,O.compromiso,O.fecha FROM compromiso O,usuarios U, usuarios D 
+$consulta = $con->query(
+"SELECT O.id_com,O.id_observacion,O.de,REPLACE(D.nombre, ' ', '_') profe,U.nombre,O.version,O.compromiso,O.fecha_est
+FROM compromiso O,usuarios U, usuarios D 
 WHERE O.para=U.documento AND O.para = D.documento AND O.de = '$doc'");
 while($row = mysqli_fetch_array($consulta)){
 
@@ -98,11 +109,14 @@ while($row = mysqli_fetch_array($consulta)){
 
     <tbody>
         <tr>
+        <td><?php echo "<a href=mvc_reportes/mvc_est.php?id=".$row['id_observacion'].">".$row['id_observacion']?></td>
             <td><?php echo $row['profe']?></td>
             <td><?php echo $row['version']?></td>
             <td><?php echo $row['compromiso']?></td>
-            <td><?php echo $row['fecha']?></td>
+            <td><?php echo $row['fecha_est']?></td>
+            
         </tr>
+        
     </tbody>
 <?php }?>
 </table>
