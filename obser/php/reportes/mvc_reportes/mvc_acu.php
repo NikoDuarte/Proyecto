@@ -4,9 +4,9 @@ session_start();
 ob_start();
 
 $doc = $_SESSION['documento'];
-$nom = $_SESSION['nombre'];
-if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
-    header("location:../php-login/login.html");
+$nom = $_SESSION['user'];
+if (!isset($_SESSION['user'],$_SESSION['documento'])) {
+    header("location:../php-login/login.php");
 }
 
 
@@ -18,13 +18,8 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Reporte de observacion</title>
     <link rel="stylesheet" href="../assets/css/estilosacu.css">
-    <style>
-        body{
-            background-image: url("../img/imagenacu.jpg");
-        }
-    </style>
 </head>
 <body>
     
@@ -46,8 +41,8 @@ $id = $_GET['id'];
         </label>
         <nav class="menu">
             <ul>
-                <li><a href="../reporteacu.php"> Tus Observaciones </a></li>
-                <li><a href="../../../../php-login/php/logout.php"> Cerrar Sesion </a></li>
+                <li><a href="../reporteacu.php"><i class="fas fa-book"></i> Tus Observaciones </a></li>
+                <li><a href="../../../../php-login/php/logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion </a></li>
             </ul>
         </nav>
     </div>
@@ -60,7 +55,6 @@ $id = $_GET['id'];
 <table class="tabla">
         <thead>
             <th>Hizo la observacion </th>
-            <th>Curso</th>
             <th>Tipo</th>
             <th>Fecha</th>
             <th>Observacion</th>
@@ -70,7 +64,7 @@ $id = $_GET['id'];
 $con = New Conexion();
 
 
-$consulta = $con->query("SELECT O.id_obser,O.de,REPLACE(D.nombre, ' ', '_') profe,U.nombre,U.curso,O.observacion,O.fecha,O.tipo 
+$consulta = $con->query("SELECT O.id_obser,O.de,REPLACE(D.nombre, ' ', ' ') profe,U.nombre,U.curso,O.observacion,O.fecha,O.tipo 
 FROM observaciones O 
 INNER JOIN usuarios U ON O.para=U.documento 
 INNER JOIN usuarios D ON O.de=D.documento 
@@ -82,8 +76,7 @@ while($row = mysqli_fetch_array($consulta)){
 ?>
     <tbody>
         <tr>
-            <td><?php echo $row['nombre']?></td>
-            <td><?php echo $row['curso']?></td>
+            <td><?php echo $row['profe']?></td>
             <td><?php echo $row['tipo']?></td>
             <td><?php echo $row['fecha']?></td>
             <td><?php echo $row['observacion']?></td>
@@ -149,15 +142,15 @@ while($row = mysqli_fetch_array($consulta)){
 $con = New Conexion();
 
 
-$consulta = $con->query("SELECT O.id_com,O.id_observacion,O.de,REPLACE(D.nombre, ' ', '_') profe,
+$consulta = $con->query("SELECT O.id_com,O.id_observacion,O.de,REPLACE(D.nombre, ' ', ' ') profe,
 U.nombre,O.compromiso_familiar,O.fecha_acu FROM compromiso O,usuarios U, usuarios D 
-WHERE O.para=U.documento AND O.para = D.documento AND O.doc_acudiente = '$doc' AND O.id_observacion = '$id'");
+WHERE O.para=U.documento AND O.doc_acudiente = D.documento AND O.doc_acudiente = '$doc' AND O.id_observacion = '$id'");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>
     <tbody>
         <tr>
-            <td><?php echo $row['nombre']?></td>
+            <td><?php echo $row['profe']?></td>
             <td><?php echo $row['compromiso_familiar']?></td>
             <td><?php echo $row['fecha_acu']?></td>
         </tr>
@@ -167,7 +160,7 @@ while($row = mysqli_fetch_array($consulta)){
 
 
 
-
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="assets/js/main.js"></script>
 

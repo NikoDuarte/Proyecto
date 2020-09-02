@@ -4,8 +4,8 @@ session_start();
 ob_start();
 
 $doc = $_SESSION['documento'];
-$_SESSION['nombre'];
-if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
+$_SESSION['user'];
+if (!isset($_SESSION['user'],$_SESSION['documento'])) {
     header("location:../php-login/login.php");
 }
 
@@ -23,17 +23,11 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
     <script src="assets/js/push.min.js"></script>
     <link rel="stylesheet" href="assets/css/estilosdoc.css">
-    <style>
-        body{
-            background-image: url(img/imagen.jpg);
-        }
-    </style>
 </head>
 <body>
 <?php 	include("php/conexion.php");  
 		$con = New Conexion();
 ?>
-
 
     
     <!--POPUP_CURSO-->
@@ -83,7 +77,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 						
 						$sede = $_GET["sede"];
                         $curso = $_GET["curso"];
-                        $resultados = $con->query("SELECT concat(documento,'_',replace(nombre,' ','_')) as nombre FROM usuarios WHERE curso = '$curso'");
+                        $resultados = $con->query("SELECT concat(documento,'_',replace(nombre,' ','_')) as nombre FROM usuarios WHERE curso = '$curso' AND rol = 'Estudiante'");
 						while ($consulta = mysqli_fetch_array($resultados)) {
 							echo "<option value=".$consulta ['nombre'].">".$consulta ['nombre']."</option>";
 							
@@ -102,20 +96,39 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check">
-        <h2><a href="../obser/perfiles/mi_perfil_doc.php?documento=<?php echo $_SESSION['documento'];?>"><?php echo $_SESSION['nombre']?></a></h2>
+        <h2><a href="../obser/perfiles/mi_perfil_doc.php?documento=<?php echo $_SESSION['documento'];?>"><?php echo $_SESSION['user']?></a></h2>
         <label for="check" class="icon-menu">
             <img src="img/menu.svg" width="25" height="25">
         </label>
         <nav class="menu">
             <ul>
-                <li><a href="../obser/perfiles/mi_perfil_doc.php?documento=<?php echo $_SESSION['documento'];?>"> Mi perfil </a></li>
-                <li><a href="php/reportes/reportedoc.php"> Tus observaciones </a></li>
-                <li><a href="../php-login/php/logout.php"> Cerrar Sesion </a></li>
+                <li>
+                    <a href="../obser/perfiles/mi_perfil_doc.php?documento=<?php echo $_SESSION['documento'];?>"><i class="fas fa-user-cog"></i> Mi perfil </a></li>
+                <li><a href="php/reportes/reportedoc.php"><i class="fas fa-book"></i> Tus observaciones </a></li>
+                <?php
+                  $con = New Conexion();
+                  $consulta=$con->query("SELECT rol FROM usuarios WHERE documento = $doc");
+                  $fila = $consulta->fetch_object();
+
+                  $rol = $fila->rol;
+
+                  switch ($rol) {
+                    case 'Asesor':
+                      echo "<li><a href='php/reportes/reporteAsesor.php'><i class='fas fa-chalkboard-teacher'></i> Reporte de tu curso </a></li>";
+                      break;
+                    
+                    default:
+                      # code...
+                      break;
+                  }
+
+                ?>
+                <li><a href="../php-login/php/logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion </a></li>
             </ul>
         </nav>
     </div>
 </main>
-
+<?php include("php/mensajedoc.php");?>
 <table class="nav">
     <tr>
         <td>
@@ -157,7 +170,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
                     <tr>
                         <td>
                         <div class="fakeobser" >
-                            <form action="php/mensajedoc.php" method="post"> 
+                            <form  method="post"> 
                             <div align="center">
                                 Nombre estudiante:
                             </div>
@@ -229,7 +242,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 </div>
 <br>
 <div class="fakeobser">
-    <textarea class="form-control" type="textarea" name="obser" id="form" maxlength="650" rows="10" >
+    <textarea class="form-control" type="textarea" name="obser" id="form" onClick="this.value=''" >Ingresa la observacion...
     </textarea>
 </div>
 <br>
@@ -238,10 +251,11 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 </div>
 </form>
     </div>
+    
 </div>
 
 
-
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="assets/js/main.js"></script>
 

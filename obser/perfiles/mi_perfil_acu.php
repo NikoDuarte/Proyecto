@@ -4,8 +4,8 @@ session_start();
 ob_start();
 
 $doc = $_SESSION['documento'];
-$nom = $_SESSION['nombre'];
-if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
+$nom = $_SESSION['user'];
+if (!isset($_SESSION['user'],$_SESSION['documento'])) {
     header("location:../php-login/login.php");
 }
 
@@ -21,12 +21,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Perfil</title>
   <link rel="stylesheet" href="../assets/css/mi_perfil_acu.css">
-  <style>
-        body{
-            background-image: url("../img/imagenacu.jpg");
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
 <main>
@@ -39,9 +34,9 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
         </label>
         <nav class="menu">
             <ul>
-                <li><a href="../app_acudiente.php"> Inicio</a></li>
-                <li><a href="../php/reportes/reporteacu.php"> Tus observaciones</a></li>
-                <li><a href="../../php-login/php/logout.php"> Cerrar Sesion</a></li>
+                <li><a href="../app_acudiente.php"><i class="fas fa-home"></i>  Inicio</a></li>
+                <li><a href="../php/reportes/reporteacu.php"><i class="fas fa-book"></i>  Tus observaciones</a></li>
+                <li><a href="../../php-login/php/logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a></li>
             </ul>
         </nav>
         
@@ -72,6 +67,6 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
     </form>
   </div>
 </div>
-
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 </body>
 </html>

@@ -5,14 +5,13 @@
     font-family: 'Raleway', sans-serif;
 }
 
-img{
-    height: auto;
-    max-width: 100%;
+body{
+	background-color: #202122;
 }
 
 .content-all{
     width: 100%;
-    background-color: rgba(255, 187, 0, 0.493);
+    background-color: #ff6600e7;
     margin: auto;
     margin-top: 80px;
 }
@@ -23,7 +22,7 @@ header{
     position: fixed;
     left: 0;
     top: 0;
-    background-color: rgba(255, 187, 0, 0.493);
+	background: linear-gradient(to bottom left, rgba(27, 27, 27, 0.74), #ff6600e7);
 }
 
 #check-menu{
@@ -39,7 +38,7 @@ header{
     top: 60px;
     width: 0px;
     height: 100vh;
-    background: rgba(51, 51, 51, 0.521);
+    background: rgba(51, 51, 51, 0.616);
     transition: all 0.25s;
     overflow: hidden;
 }
@@ -55,9 +54,15 @@ header{
 }
 
 .menu li:hover{
-    background: rgba(255, 187, 0, 0.493);
+	background: linear-gradient(to top , #d45500e0, #ff6600e7);
 }
 
+i{
+	color: #dfdfdf;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
 .content-all label{
     position: fixed;
@@ -68,6 +73,10 @@ header{
     color: white;
     cursor: pointer;
     z-index: 10;
+}
+
+.content-all img{
+	margin-left: 15px;
 }
 
 .content-all h2 a{
@@ -88,8 +97,13 @@ header{
     padding: 10px;
 }
 
+.contenedor-titles h2{
+    background-color: #e25a00e7;
+    width: 45%;
+}
+
 #main-container{
-	margin: 150px auto;
+	margin: 70px auto;
 	width: 100%;
 }
 
@@ -114,8 +128,8 @@ td a{
 
 
 thead{
-	background-color: rgba(255, 187, 0, 0.493);
-	border-bottom: solid 5px rgba(80, 74, 0, 0.671);
+	background-color: #e25a00e7;
+	border-bottom: solid 5px #773000;
 	color: #000;
 }
 
@@ -124,6 +138,7 @@ tr:nth-child(even){
 }
 
 tr:hover td{
-	background-color: rgba(43, 43, 43, 0.664);
-	color: white;
+	background-color: rgba(105, 105, 105, 0.664);
+    color: white;
+    border: 1px solid #e25a00e7;
 }

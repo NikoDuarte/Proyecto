@@ -183,12 +183,45 @@ a:hover{
 	background-position: right;
 }
 
+.ok {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-style: 14px;
+    width: 600px;
+    border-radius: 7px;
+    padding: 12px;
+    background-color: #ff7b00;
+	color: #fff;
+}
 
+
+  .bad {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-style: 14px;
+    width: 600px;
+    border-radius: 7px;
+    padding: 12px;
+    background-color: #a22;
+    color: #ffffff;
+	z-index: 10;
+	transition: 1.5s;
+  }
 
 @media screen and (max-width: 1050px){
 	.container{
 		grid-gap: 5rem;
 	}
+	.ok {
+		width: 100%;
+		font-size: 10px;
+	  }
+	
+	
+	  .bad {
+		width: 100%;
+		font-size: 10px;
+	  }
 }
 
 @media screen and (max-width: 1000px){

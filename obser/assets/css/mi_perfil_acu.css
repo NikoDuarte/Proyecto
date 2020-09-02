@@ -5,9 +5,14 @@
     font-family: 'Lato', sans-serif;
 }
 
+body{
+	background-color: #202122;
+}
+
+
 .content-all{
     width: 100%;
-    background-color: rgba(255, 187, 0, 0.493);
+    background-color: #ff6600e7;
     margin: auto;
     margin-top: 80px;
 }
@@ -18,7 +23,7 @@ header{
     position: fixed;
     left: 0;
     top: 0;
-    background-color: rgba(255, 187, 0, 0.493);
+	background: linear-gradient(to bottom left, rgba(27, 27, 27, 0.74), #ff6600e7);
 }
 
 #check{
@@ -34,7 +39,7 @@ header{
     top: 65px;
     width: 300px;
     height: 100vh;
-    background: rgba(51, 51, 51, 0.712);
+    background: rgba(51, 51, 51, 0.616);
     transition: all 0.25s;
     overflow: hidden;
 }
@@ -51,9 +56,15 @@ header{
 }
 
 .menu li:hover{
-    background: rgba(255, 187, 0, 0.493);
+	background: linear-gradient(to top , #d45500e0, #ff6600e7);
 }
 
+i{
+	color: #dfdfdf;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
 .content-all label{
     position: fixed;
@@ -63,6 +74,10 @@ header{
     color: white;
     cursor: pointer;
     z-index: 10;
+}
+
+.content-all img{
+	margin-left: 15px;
 }
 
 .content-all h2 a{

@@ -4,9 +4,9 @@ session_start();
 ob_start();
 
 $doc = $_SESSION['documento'];
-$nom = $_SESSION['nombre'];
-if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
-    header("location:../php-login/login.html");
+$nom = $_SESSION['user'];
+if (!isset($_SESSION['user'],$_SESSION['documento'])) {
+    header("location:../php-login/login.php");
 }
 
 
@@ -18,13 +18,8 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Reporte de la observacion</title>
     <link rel="stylesheet" href="../assets/css/estilosdoc.css">
-    <style>
-        body{
-            background-image: url("../img/imagendoc.jpg");
-        }
-    </style>
 </head>
 <body>
     
@@ -46,8 +41,8 @@ $id = $_GET['id'];
         </label>
         <nav class="menu">
             <ul>
-                <li><a href="../reportedoc.php"> Tus Observaciones </a></li>
-                <li><a href="../../../../php-login/php/logout.php"> Cerrar Sesion </a></li>
+                <li><a href="../reportedoc.php"><i class="fas fa-book"></i> Tus Observaciones </a></li>
+                <li><a href="../../../../php-login/php/logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion </a></li>
             </ul>
         </nav>
     </div>
@@ -55,7 +50,15 @@ $id = $_GET['id'];
 
 <br>
 <br>
-<br>
+
+<div align="center">
+    <div class="contenedor">
+    <h2 class="respuesta">Observacion</h2>
+</div>
+
+</div>
+
+<br><br>
 
 <table class="tabla">
         <thead>
@@ -88,9 +91,13 @@ while($row = mysqli_fetch_array($consulta)){
 </table>
 
 <br><br>
-<h2 align="center" class="respuesta">Respuesta Estudiante</h2>
-<br><br>
+<div align="center">
+    <div class="contenedor">
+<h2 class="respuesta">Respuesta Estudiante</h2>
+</div>
 
+</div>
+<br><br>
 <table class="tabla">
         <thead>
             <th>Respondio la observacion</th>
@@ -124,7 +131,13 @@ while($row = mysqli_fetch_array($consulta)){
 
 
 <br><br>
-<h2 align="center" class="respuesta">Respuesta Familiar (Acudiente)</h2>
+<div align="center">
+<div class="contenedor" align="center">
+    <h2 class="respuesta">Respuesta Familiar (Acudiente)</h2>
+</div>
+
+</div>
+
 <br><br>
 
 <table class="tabla">
@@ -156,7 +169,7 @@ while($row = mysqli_fetch_array($consulta)){
 
 
 
-
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="assets/js/main.js"></script>
 

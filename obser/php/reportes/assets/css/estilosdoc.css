@@ -2,13 +2,16 @@
     margin: 0;
     padding: 0;
 	box-sizing: border-box;
-	font-family: 'Raleway', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
+body{
+	background-color: #202122;
+}
 
 /*POPUP_CURSO*/
 .ventana_curso{
-	background: rgba(51, 51, 51, 0.596);
+	background: hsla(216, 100%, 24%, 0.801);
 	width: 30%;
 	color: white;
 	font-size: 20px;
@@ -35,7 +38,7 @@
 	color: black; /*color texto*/
 	text-decoration: none; /*decoración texto*/
 	text-transform: uppercase; /*capitalización texto*/
-	font-family: 'Prompt', sans-serif; /*tipografía texto*/
+    font-family: 'Poppins', sans-serif;
     border-radius: 15px; /*bordes redondos*/
     cursor: pointer;
 }
@@ -97,7 +100,7 @@
 	color: black; /*color texto*/
 	text-decoration: none; /*decoración texto*/
 	text-transform: uppercase; /*capitalización texto*/
-	font-family: 'Prompt', sans-serif; /*tipografía texto*/
+    font-family: 'Poppins', sans-serif;
     border-radius: 15px; /*bordes redondos*/
     cursor: pointer;
 }
@@ -133,7 +136,7 @@
 
 .content-all{
     width: 100%;
-    background-color: rgba(0, 140, 255, 0.493);
+    background-color: hsla(216, 100%, 24%, 0.89);
     margin: auto;
     margin-top: 80px;
 }
@@ -144,7 +147,7 @@ header{
     position: fixed;
     left: 0;
     top: 0;
-    background-color: rgba(0, 140, 255, 0.493);
+	background: linear-gradient(to bottom left, rgba(27, 27, 27, 0.74), hsla(216, 100%, 24%, 0.801));
 }
 
 #check{
@@ -173,11 +176,19 @@ header{
     display: block;
 	width: 250px;
 	text-decoration: none;
-	font-size: 20px;
+	font-size: 18px;
 }
 
+i{
+	color: #8b8b8b;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
 .menu li:hover{
-    background: rgba(0, 166, 255, 0.651);
+    background: hsla(216, 100%, 24%, 0.801);
 }
 
 
@@ -190,6 +201,10 @@ header{
     color: white;
     cursor: pointer;
     z-index: 10;
+}
+
+.content-all img{
+	margin-left: 15px;
 }
 
 .content-all h2 a{
@@ -212,21 +227,21 @@ header{
 .btn-menu {
 	display: none;
 	padding: 10px;
-	background: #00a6ff;
+	background: hsl(216, 100%, 24%);
+	margin: 3px solid hsl(216, 100%, 24%);
 	color:#fff;
 }
 
 .btn-menu .icono {
-	float: center;
+	float: right;
 }
 
 .contenedor-menu {
-    text-align: center;
 	width: 20%;
 	min-width: 300px;
-	margin: 50px;
+	margin: 20px;
 	display: inline-block;
-	font-family: 'Prompt', sans-serif;
+    font-family: 'Poppins', sans-serif;
 	line-height: 18px;
 }
 
@@ -250,7 +265,7 @@ header{
 
 .contenedor-menu .submenu li a:hover {
 	text-decoration: none;
-	background: #00a6ff;
+	background: hsl(216, 100%, 24%);
 	color:#fff;
 }
 
@@ -268,7 +283,7 @@ header{
 
 .contenedor-menu .submenu .activado > a {
 	text-decoration: none;
-	background: #00a6ff;
+	background: hsla(216, 100%, 24%, 0.89);
 	color:#fff;
 }
 
@@ -294,9 +309,14 @@ header{
 	}
 }
 
+.contenedor{
+	width: 35%;
+	text-align: center;
+}
+
 .respuesta{
     color: white;
-    background-color: rgba(34, 34, 34, 0.781);
+    background-color: hsla(216, 100%, 24%, 0.89);
     border-radius: 10px;
     padding: 10px;
 }
@@ -322,8 +342,8 @@ header{
 
 
 .tabla thead{
-	background-color: rgba(0, 140, 255, 0.493);
-	border-bottom: solid 5px rgba(0, 63, 114, 0.842);
+	background-color: hsla(216, 100%, 24%, 0.801);
+	border-bottom: solid 5px hsl(216, 100%, 24%);
 	color: white;
 }
 
@@ -332,6 +352,6 @@ header{
 }
 
 .tabla tr:hover td{
-	background-color: rgba(43, 43, 43, 0.493);
+	background-color: hsla(216, 100%, 24%, 0.603);
 	color: white;
 }

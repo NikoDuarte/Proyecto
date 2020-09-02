@@ -4,9 +4,9 @@ session_start();
 ob_start();
 
 $doc = $_SESSION['documento'];
-$nom = $_SESSION['nombre'];
-if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
-    header("location:../php-login/login.html");
+$nom = $_SESSION['user'];
+if (!isset($_SESSION['user'],$_SESSION['documento'])) {
+    header("location:../php-login/login.php");
 }
 
 
@@ -18,13 +18,8 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Reporte de la Observacion</title>
     <link rel="stylesheet" href="../assets/css/estilosest.css">
-    <style>
-        body{
-            background-image: url("../img/imagenest.jpg");
-        }
-    </style>
 </head>
 <body>
     
@@ -40,14 +35,14 @@ $id = $_GET['id'];
     <div class="content-all">
     <header></header>
         <input type="checkbox" id="check-menu">
-        <h2><a href="../../perfiles/mi_perfil_est.php?correo=<?php echo $_SESSION['documento'];?>"><?php echo $nom;?></a></h2>
+        <h2><a href="../../../perfiles/mi_perfil_est.php?correo=<?php echo $_SESSION['documento'];?>"><?php echo $nom;?></a></h2>
         <label for="check-menu" class="icon-menu">
             <img src="../img/menu.svg" width="25" height="25">
         </label>
         <nav class="menu">
             <ul>
-                <li><a href="../reporteest.php"> Tus Observaciones </a></li>
-                <li><a href="../../../../php-login/php/logout.php"> Cerrar Sesion </a></li>
+                <li><a href="../reporteest.php"><i class="fas fa-book"></i> Tus Observaciones </a></li>
+                <li><a href="../../../../php-login/php/logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion </a></li>
             </ul>
         </nav>
     </div>
@@ -113,7 +108,7 @@ while($row = mysqli_fetch_array($consulta)){
 
     <tbody>
         <tr>
-            <td><?php echo $row['profe']?></td>
+            <td><?php echo $row['nombre']?></td>
             <td><?php echo $row['version']?></td>
             <td><?php echo $row['compromiso']?></td>
             <td><?php echo $row['fecha_est']?></td>
@@ -159,7 +154,7 @@ while($row = mysqli_fetch_array($consulta)){
 
 
 
-
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="assets/js/main.js"></script>
 

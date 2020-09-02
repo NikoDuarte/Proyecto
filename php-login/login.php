@@ -11,13 +11,16 @@
 </head>
 <body>
 	<img class="wave" src="img/wave.png">
+	<?php
+			include("php/validar.php");
+			?>
+
 	<div class="container">
 		<div class="img">
 			<img src="img/ilustracion_ob.svg">
 		</div>
-
 		<div class="login-content">
-			<form action=" php/validar.php" method="POST">                 
+			<form method="POST">                 
 				<img src="img/avatar_registro.svg">
 				<a href="#" class="h2"><h2 class="title"> BIENVENIDO</h2></a>
 				<div class="input-div one">
@@ -26,13 +29,11 @@
 				</div>
 			  <div class="div">
 							<h5>Documento</h5>
-							<input type="text" class="input" name="doc">
+							<input type="number" class="input" name="doc">
 					</div>
 				 </div>
-				<a href="#">Olvide mi contraseña?</a>
-				<input type="submit" class="btn" value="Iniciar Sesion">
+				<input type="submit" class="btn" value="Iniciar Sesion" name="iniciar">
 				<a href="../index.html" class="btn">Vuelve al inicio</a>
-				
 			</form>
         </div>
     </div>	

@@ -5,11 +5,14 @@
     font-family: 'Raleway', sans-serif;
 }
 
+body{
+	background-color: #202122;
+}
 
 
 .content-all{
     width: 100%;
-    background-color: rgba(39, 39, 39, 0.637);
+    background-color: rgba(192, 0, 0, 0.808);
     margin: auto;
     margin-top: 80px;
 }
@@ -20,7 +23,7 @@ header{
     position: fixed;
     left: 0;
     top: 0;
-    background-color: rgba(39, 39, 39, 0.637);
+	background: linear-gradient(to bottom left, rgba(27, 27, 27, 0.74), rgba(192, 0, 0, 0.808));
 }
 
 #check-menu{
@@ -36,7 +39,7 @@ header{
     top: 60px;
     width: 0px;
     height: 100vh;
-    background: rgba(51, 51, 51, 0.521);
+    background: rgba(51, 51, 51, 0.616);
     transition: all 0.25s;
     overflow: hidden;
 }
@@ -51,8 +54,17 @@ header{
     text-decoration: none;
 }
 
+i{
+	color: #dfdfdf;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .menu li:hover{
-    background: rgba(255, 0, 0, 0.479);
+    background: rgba(192, 0, 0, 0.705);
+    transition: all 0.5s;
+    color: #fff;
 }
 
 
@@ -65,6 +77,10 @@ header{
     color: white;
     cursor: pointer;
     z-index: 10;
+}
+
+.content-all img{
+	margin-left: 15px;
 }
 
 .content-all h2 a{
@@ -91,7 +107,7 @@ header{
     -ms-flex: 30%;
     flex: 30%;
     /*background-color: #747474;*/
-    padding: 20px;
+    padding: 5px;
 }
 
 
@@ -101,8 +117,8 @@ header{
 	width: 35%;
     -ms-flex: 15%;
     flex: 15%;
-    background-color: rgba(58, 58, 58, 0.637);
-    padding: 20px;
+    background-color: rgba(192, 0, 0, 0.61);
+    padding: 6px;
     padding-bottom: 0.5rem;
     border-radius: 15px;
 
@@ -113,7 +129,7 @@ header{
 	text-align: center;
     -ms-flex: 15%;
     flex: 15%;
-    background-color: rgba(39, 39, 39, 0.637);
+    background-color: rgba(192, 0, 0, 0.61);
     padding: 10px;
     padding-bottom: 0.5rem;
     border-radius: 15px;
@@ -136,7 +152,7 @@ td{
 	width: 90%;
     -ms-flex: 15%;
     flex: 15%;
-    background-color: rgba(39, 39, 39, 0.637);
+    background-color: rgba(192, 0, 0, 0.61);
     padding: 20px;
 	padding-bottom: 1rem;
 	border-radius: 15px;
@@ -149,7 +165,7 @@ td{
 	width: 90%;
     -ms-flex: 15%;
     flex: 15%;
-	background-color: rgba(39, 39, 39, 0.637);
+	background-color: rgba(192, 0, 0, 0.61);
 	padding: 20px;
 	padding-left: 20px;
     padding-bottom: 1rem;
@@ -233,6 +249,32 @@ td{
 }
 
 .fakeobser input[type="submit"]:hover {
-    background-color: rgba(0, 0, 0, 0.637);
+    background-color: rgba(192, 0, 0, 0.61);
     color: white;
 }
+
+.ok {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-style: 14px;
+    width: 600px;
+    border-radius: 7px;
+    padding: 12px;
+    background-color: #33ff00ef;
+	color: #fff;
+}
+
+
+  .bad {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-style: 14px;
+    width: 600px;
+    border-radius: 7px;
+    padding: 12px;
+    background-color: #a22;
+    color: #ffffff;
+	z-index: 10;
+	transition: 1.5s;
+  }
+

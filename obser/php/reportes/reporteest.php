@@ -4,9 +4,9 @@ session_start();
 ob_start();
 
 $doc = $_SESSION['documento'];
-$_SESSION['nombre'];
-if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
-    header("location:../php-login/login.html");
+$_SESSION['user'];
+if (!isset($_SESSION['user'],$_SESSION['documento'])) {
+    header("location:../php-login/login.php");
 }
 
 
@@ -21,26 +21,21 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
     <title>Tus Observaciones</title>
     <link rel="stylesheet" href="assets/css/estilosest.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
-    <style>
-        body{
-            background-image: url("img/imagenest.jpg");
-        }
-    </style>
 </head>
 <body>
 <main>
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check-menu">
-        <h2><a href="../../perfiles/mi_perfil_est.php?correo=<?php echo $_SESSION['documento'];?>"><?php echo $_SESSION['nombre']?></a></h2>
+        <h2><a href="../../perfiles/mi_perfil_est.php?correo=<?php echo $_SESSION['documento'];?>"><?php echo $_SESSION['user']?></a></h2>
         <label for="check-menu" class="icon-menu">
             <img src="img/menu.svg" width="25" height="25">
         </label>
         <nav class="menu">
             <ul>
-                <li><a href="../../app_estudiante.php"> Inicio</a></li>
-                <li><a href="../../perfiles/mi_perfil_est.php?correo=<?php echo $_SESSION['documento'];?>"> Mi perfil</a></li>
-                <li><a href="../../../php-login/php/logout.php"> Cerrar Sesion</a></li>
+                <li><a href="../../app_estudiante.php"><i class="fas fa-home"></i>  Inicio</a></li>
+                <li><a href="../../perfiles/mi_perfil_est.php?correo=<?php echo $_SESSION['documento'];?>"><i class="fas fa-user-cog"></i> Mi perfil</a></li>
+                <li><a href="../../../php-login/php/logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a></li>
             </ul>
         </nav>
     </div>
@@ -61,8 +56,8 @@ $con = New Conexion();
 $consulta = $con->query(
 "SELECT O.id_obser,O.de,REPLACE(D.nombre, ' ', '_') profe,U.nombre,U.curso,O.observacion,O.fecha,O.tipo 
 FROM observaciones O,usuarios U, usuarios D
-WHERE O.para=U.documento AND O.de = D.documento AND O.para = '$doc'
-AND o.id_obser NOT IN (SELECT c.id_observacion FROM compromiso c where c.de=o.para)");
+WHERE O.para=U.documento AND O.de = D.documento AND O.de = '$doc' O.para=D.documento
+AND O.id_obser NOT IN (SELECT c.id_observacion FROM compromiso c where c.de=O.para)");
 
 /*$consulta = $con->query("SELECT O.id_obser,O.de,REPLACE(D.nombre, ' ', '_') profe,U.nombre,U.curso,O.observacion,O.fecha,O.tipo FROM observaciones O,usuarios U, usuarios D 
 WHERE O.para=U.documento AND O.de = D.documento AND O.para = '$doc'");*/
@@ -123,5 +118,6 @@ while($row = mysqli_fetch_array($consulta)){
 
 
 </main>
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 </body>
 </html>

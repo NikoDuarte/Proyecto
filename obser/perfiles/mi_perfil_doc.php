@@ -5,8 +5,8 @@ session_start();
 ob_start();
 
 $doc = $_SESSION['documento'];
-$nom = $_SESSION['nombre'];
-if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
+$nom = $_SESSION['user'];
+if (!isset($_SESSION['user'],$_SESSION['documento'])) {
     header("location:../php-login/login.php");
 }
 
@@ -22,12 +22,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Perfil</title>
   <link rel="stylesheet" href="../assets/css/mi_perfil_doc.css">
-  <style>
-        body{
-          background-image: url(../img/imagen.jpg);
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
 <main>
@@ -40,14 +35,62 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
         </label>
         <nav class="menu">
             <ul>
-                <li><a href="../app_docente.php">Inicio</a></li>
-                <li><a href="../php/reportes/reportedoc.php">Tus observaciones</a></li>
-                <li><a href="../../php-login/php/logout.php">Cerrar Sesion</a></li>
+                <li><a href="../app_docente.php"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="../php/reportes/reportedoc.php"><i class="fas fa-book"></i> Tus observaciones</a></li>
+                <?php
+                  include("../php/conexion.php");  
+                  $con = New Conexion();
+                  $consulta=$con->query("SELECT rol FROM usuarios WHERE documento = $doc");
+                  $fila = $consulta->fetch_object();
+
+                  $rol = $fila->rol;
+
+                  switch ($rol) {
+                    case 'Asesor':
+                      echo "<li><a href='php/reportes/reporteAsesor.php'><i class='fas fa-chalkboard-teacher'></i> Reporte de tu curso </a></li>";
+                      break;
+                    
+                    default:
+                      # code...
+                      break;
+                  }
+
+                ?>
+                <li><a href="../../php-login/php/logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a></li>
+
             </ul>
         </nav>
         
     </div>
 </main>
+
+<?php 
+if (isset($_POST['actualizar']))
+{
+
+  $sede = $_POST['sede'];
+
+
+    $sql = $con->query("UPDATE usuarios SET sede = '$sede' WHERE documento = '$doc'");
+  if ($sql) {
+    ?>
+    <div class="cont" align="center">
+    <h3 class="ok">Se ha modificado tu perfil exitosamente!</h3>
+    <meta http-equiv="refresh" content="1.5;URL=mi_perfil_doc.php">
+    </div>
+<?php
+}else{
+  ?>
+  <div class="cont" align="center">
+  <h3 class="bad">Ups! a ocurrido un error al editar ti perfil</h3>
+  <meta http-equiv="refresh" content="1.5;URL=mi_perfil_doc.php">
+  </div>
+<?php
+}
+}
+?>
+
+
 <div class="row">
   <div class="form">
     <h1>Empieza A Modificar Tu Perfil</h1>
@@ -55,7 +98,6 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
     <form action="" method="post">
 
           <?php 
-      include("../php/conexion.php");  
       $con = New Conexion();
       if (isset($_POST['consultar'])){
         $doc = $_SESSION['documento'];
@@ -70,7 +112,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
       <h2 class="titulo1">Tu institucion es:</h2>
       <input type="text" name="institucion" id="institucion" value="<?php echo $consulta ['institucion'];?>" disabled>
       <h2 class="titulo2">Tu sede es:</h2>
-      <input type="text" name="sede" id="sede" value="<?php echo $consulta ['sede'];?>">
+      <input type="text" class="activo" name="sede" id="sede" value="<?php echo $consulta ['sede'];?>">
       <br>
       <h2 class="titulo2">Tu documento es:</h2>
       <input type="text" name="documento" id="documento" disabled value="<?php echo $consulta ['documento'];?>"><?php }} ?>
@@ -80,29 +122,9 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
       <input type="submit" class="modificar" name="actualizar" id="boton" value="actualizar datos">
     </form>
   </div>
-  <?php 
-if (isset($_POST['actualizar']))
-{
-
-  $sede = $_POST['sede'];
-
-
-    $sql = $con->query("UPDATE usuarios SET sede = '$sede' WHERE documento = '$doc'");
-  if ($sql) {
-    echo "<script type='text/javascript'>
-    alert('Se han cambiado sus datos exitosamente');
-    window.location.href='mi_perfil_doc.php?correo=$_SESSION[documento]';
-    </script>";
-  }else{
-      echo "<script type='text/javascript'>
-    alert('No se han podido cambiar sus datos');
-    window.location.href='mi_perfil_doc.php?correo=$_SESSION[documento]';
-    </script>";
-}
-}
-?>
 
 </div>
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 
 </body>
 </html>

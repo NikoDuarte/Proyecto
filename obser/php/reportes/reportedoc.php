@@ -4,9 +4,9 @@ session_start();
 ob_start();
 
 $doc = $_SESSION['documento'];
-$nom = $_SESSION['nombre'];
-if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
-    header("location:../php-login/login.html");
+$nom = $_SESSION['user'];
+if (!isset($_SESSION['user'],$_SESSION['documento'])) {
+    header("location:../php-login/login.php");
 }
 
 
@@ -18,13 +18,8 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Reporte Observacion</title>
     <link rel="stylesheet" href="assets/css/estilosdoc.css">
-    <style>
-        body{
-            background-image: url("img/imagendoc.jpg");
-        }
-    </style>
 </head>
 <body>
     
@@ -75,9 +70,27 @@ include("assets/php/conexion.php");
         </label>
         <nav class="menu">
             <ul>
-                <li><a href="../../app_docente.php"> Inicio </a></li>
-                <li><a href="../../perfiles/mi_perfil_doc.php?correo=<?php echo $_SESSION['documento'];?>"> Mi perfil </a></li>
-                <li><a href="../../../php-login/php/logout.php"> Cerrar Sesion </a></li>
+                <li><a href="../../app_docente.php"><i class="fas fa-home"></i> Inicio </a></li>
+                <li><a href="../../perfiles/mi_perfil_doc.php?correo=<?php echo $_SESSION['documento'];?>"><i class="fas fa-user-cog"></i> Mi perfil </a></li>
+                <?php
+                  $con = New Conexion();
+                  $consulta=$con->query("SELECT rol FROM usuarios WHERE documento = $doc");
+                  $fila = $consulta->fetch_object();
+
+                  $rol = $fila->rol;
+
+                  switch ($rol) {
+                    case 'Asesor':
+                      echo "<li><a href='php/reportes/reporteAsesor.php'><i class='fas fa-chalkboard-teacher'></i> Reporte de tu curso </a></li>";
+                      break;
+                    
+                    default:
+                      # code...
+                      break;
+                  }
+
+                ?>
+                <li><a href="../../../php-login/php/logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion </a></li>
             </ul>
         </nav>
     </div>
@@ -154,7 +167,7 @@ while($row = mysqli_fetch_array($consulta)){
 
 
 
-
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="assets/js/main.js"></script>
 <script>

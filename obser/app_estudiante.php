@@ -4,9 +4,9 @@ session_start();
 ob_start();
 
 $doc = $_SESSION['documento'];
-$_SESSION['nombre'];
-if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
-    header("location:../php-login/login.html");
+$_SESSION['user'];
+if (!isset($_SESSION['user'],$_SESSION['documento'])) {
+    header("location:../php-login/login.php");
 }
 
 
@@ -21,46 +21,41 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
     <link rel="stylesheet" href="assets/css/estilosest.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
     <script src="assets/js/push.min.js"></script>
-    <style>
-        body{
-            background-image: url("img/imagenest.jpg");
-        }
-    </style>
 </head>
 <body>
-<?php
-
-include_once("php/conexion.php");
-
-?>
 <main>
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check-menu">
-        <h2><a href="../obser/perfiles/mi_perfil_est.php?documento=<?php echo $_SESSION['documento'];?>"><?php echo $_SESSION['nombre'];?></a></h2>
+        <h2><a href="../obser/perfiles/mi_perfil_est.php?documento=<?php echo $_SESSION['documento'];?>"><?php echo $_SESSION['user'];?></a></h2>
         <label for="check-menu" class="icon-menu">
             <img src="img/menu.svg" width="25" height="25">
         </label>
         <nav class="menu">
             <ul>
-                <li><a href="../obser/perfiles/mi_perfil_est.php?documento=<?php echo $_SESSION['documento'];?>"> Mi perfil</a></li>
-                <li><a href="php/reportes/reporteest.php"> Tus observaciones</a></li>
-                <li><a href="../php-login/php/logout.php"> Cerrar Sesion</a></li>
+                <li><a href="../obser/perfiles/mi_perfil_est.php?documento=<?php echo $_SESSION['documento'];?>"><i class="fas fa-user-cog"></i> Mi perfil</a></li>
+                <li><a href="php/reportes/reporteest.php"><i class="fas fa-book"></i> Tus observaciones</a></li>
+                <li><a href="../php-login/php/logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a></li>
             </ul>
         </nav>
     </div>
 </main>
 <br>
+<?php
+
+include("php/mensajeest.php");
+
+?>
 </div>
 
 <div class="row">            
-    <div class="side"align="right">
+    <div class="side"align="center">
         <br>
             <div class=side2>
                 <h2>Respondes a: </h2>
                 <div class="fakecolor" >
                 <div class="fakeobser" >
-                    <form action="php/mensajeest.php" method="post"> 
+                    <form method="post"> 
                     <div align="center">
                         ID Observacion
                         <br>
@@ -123,13 +118,13 @@ include_once("php/conexion.php");
                             <tr>
                                 <td>
                                     <div class="fakeobser">
-                                    <textarea class="form-control" type="textarea" name="version" id="form" maxlength="650" rows="10" >
+                                    <textarea class="form-control" type="textarea" name="version" id="form" onClick="this.value=''">Ingrese su version...
                                     </textarea>
                                     </div>
                                 </td>
                                 <td>
                                 <div class="fakeobser">
-                                    <textarea class="form-control" type="textarea" name="compromiso" id="form" maxlength="650" rows="10" >
+                                    <textarea class="form-control" type="textarea" name="compromiso" id="form" onClick="this.value=''">Ingrese su compromiso...
                                     </textarea>
                                     </div>
                                 </td>
@@ -146,6 +141,7 @@ include_once("php/conexion.php");
                         </div>
     </div>
 </div>
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="assets/js/main.js"></script>
 <script>

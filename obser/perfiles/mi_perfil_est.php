@@ -5,9 +5,9 @@ session_start();
 ob_start();
 
 $doc = $_SESSION['documento'];
-$_SESSION['nombre'];
-if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
-    header("location:../php-login/login.html");
+$_SESSION['user'];
+if (!isset($_SESSION['user'],$_SESSION['documento'])) {
+    header("location:../php-login/login.php");
 }
 
 
@@ -22,27 +22,22 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Perfil</title>
   <link rel="stylesheet" href="../assets/css/mi_perfil_est.css">
-  <style>
-        body{
-            background-image: url("../img/imagenest.jpg");
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
 <main>
     <div class="content-all">
         <header></header>
         <input type="checkbox" id="check">
-        <h2><a href=""><?php echo $_SESSION['nombre']?></a></h2>
+        <h2><a href=""><?php echo $_SESSION['user']?></a></h2>
         <label for="check" class="icon-menu">
             <img src="../img/menu.svg" width="25" height="25">
         </label>
         <nav class="menu">
             <ul>
-                <li><a href="../app_estudiante.php"> Inicio</a></li>
-                <li><a href="../php/reportes/reporteest.php"> Tus observaciones</a></li>
-                <li><a href="../../php-login/php/logout.php"> Cerrar Sesion</a></li>
+                <li><a href="../app_estudiante.php"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="../php/reportes/reporteest.php"><i class="fas fa-book"></i>  Tus observaciones</a></li>
+                <li><a href="../../php-login/php/logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a></li>
             </ul>
         </nav>
         
@@ -81,6 +76,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
     </form>
   </div>
 </div>
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 
 </body>
 </html>

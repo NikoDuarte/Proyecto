@@ -4,8 +4,8 @@ session_start();
 ob_start();
 
 $doc = $_SESSION['documento'];
-$nom = $_SESSION['nombre'];
-if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
+$nom = $_SESSION['user'];
+if (!isset($_SESSION['user'],$_SESSION['documento'])) {
     header("location:../php-login/login.php");
 }
 
@@ -20,11 +20,6 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
     <title>Tus Observaciones</title>
     <link rel="stylesheet" href="assets/css/estilosacu.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
-    <style>
-        body{
-            background-image: url("img/imagenacu.jpg");
-        }
-    </style>
 </head>
 <body>
 <main>
@@ -37,9 +32,9 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
         </label>
         <nav class="menu">
             <ul>
-                <li><a href="../../app_acudiente.php"> Inicio</a></li>
-                <li><a href="../../perfiles/mi_perfil_acu.php?correo=<?php echo $_SESSION['documento'];?>"> Mi perfil</a></li>
-                <li><a href="../../../php-login/php/logout.php"> Cerrar Sesion</a></li>
+                <li><a href="../../app_acudiente.php"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="../../perfiles/mi_perfil_acu.php?correo=<?php echo $_SESSION['documento'];?>"><i class="fas fa-user-cog"></i> Mi perfil</a></li>
+                <li><a href="../../../php-login/php/logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a></li>
             </ul>
         </nav>
     </div>
@@ -55,7 +50,7 @@ if (!isset($_SESSION['nombre'],$_SESSION['documento'])) {
 include("../../php/conexion.php");
 $con = New Conexion();
 
-$consulta = $con->query("SELECT U.* FROM usuarios U, usuarios r WHERE u.documento=r.documento AND r.docu_acu='$doc'");
+$consulta = $con->query("SELECT U.* FROM usuarios U, usuarios r WHERE U.documento=r.documento AND r.docu_acu='$doc'");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>
@@ -70,8 +65,11 @@ while($row = mysqli_fetch_array($consulta)){
     </tbody>
 <?php }?>
 </table>
-<br><br><br><br>
-<h2 align="center" class="respuesta">Observaciones Hechas</h2>
+<br><br>
+<div class="contenedor-titles" align="center">
+    <h2 class="respuesta">Observaciones Hechas</h2>
+
+</div>
 
 <div id="main-container">
     <table>
@@ -93,7 +91,7 @@ $consulta = $con->query(
     INNER JOIN usuarios U ON O.para=U.documento 
     
 
-WHERE  U.docu_acu='$doc' AND o.id_obser NOT IN (SELECT c.id_observacion FROM compromiso c where c.doc_acudiente=U.docu_acu)");
+WHERE  U.docu_acu='$doc' AND O.id_obser NOT IN (SELECT c.id_observacion FROM compromiso c where c.doc_acudiente=U.docu_acu)");
 while($row = mysqli_fetch_array($consulta)){
 
 ?>
@@ -110,8 +108,10 @@ while($row = mysqli_fetch_array($consulta)){
     </tbody>
 <?php }?>
 </table>
-<br><br><br><br>
-<h2 align="center" class="respuesta">Respuesta</h2>
+<br><br>
+<div align="center" class="contenedor-titles">
+    <h2 class="respuesta">Respuesta</h2>
+</div>
 <div id="main-container">
     <table>
         <thead>
@@ -121,10 +121,9 @@ while($row = mysqli_fetch_array($consulta)){
             <th>Fecha</th>
         </thead>
 <?php
-//include("../../php/conexion.php");
 $con = New Conexion();
 
-$consulta = $con->query("SELECT O.id_com,O.id_observacion,O.de,REPLACE(D.nombre, ' ', '_') profe,
+$consulta = $con->query("SELECT O.id_com,O.id_observacion,O.de,REPLACE(D.nombre, ' ', ' ') profe,
 U.nombre,O.compromiso_familiar,O.fecha_acu FROM compromiso O,usuarios U, usuarios D 
 WHERE O.para=U.documento AND O.para = D.documento AND O.doc_acudiente = '$doc'");
 while($row = mysqli_fetch_array($consulta)){
@@ -144,5 +143,6 @@ while($row = mysqli_fetch_array($consulta)){
 
 
 </main>
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 </body>
 </html>
